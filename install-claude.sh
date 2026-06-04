@@ -16,6 +16,13 @@
 
 set -e  # Exit on error
 
+# Local repository detection warning
+if [[ -d ".git" ]]; then
+  echo -e "\033[1;33m⚠️ WARNING: You are running this inside a cloned dotfiles repository.\033[0m"
+  echo -e "\033[1;33mFor local cloned repositories, please run './install.sh' instead to configure the complete dotfiles suite.\033[0m"
+  echo ""
+fi
+
 # Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'

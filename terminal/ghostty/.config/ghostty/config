@@ -1,0 +1,8 @@
+macos-non-native-fullscreen = true
+macos-titlebar-style = transparent
+window-save-state = never
+macos-auto-secure-input = true
+macos-secure-input-indication = true
+font-family = "MesloLGS Nerd Font"
+font-size = 14
+theme = tokyonight

@@ -1203,6 +1203,9 @@ cd ~/.dotfiles
 ./install.sh
 
 # This uses GNU Stow to create symlinks for all configurations
+
+**Troubleshooting:**
+If you see "stowing package would cause conflicts", simply run `./install.sh` again. The script includes a safe backup mechanism that moves conflicting files to `~/dotfiles_backup/` before linking.
 ```
 
 This will install:
