@@ -61,8 +61,13 @@ alias "??"='gh copilot suggest'
 alias "???"='gh copilot explain'
 
 # File listing (eza)
-alias ls="eza --icons --git"
-alias ll="eza -al --icons --git"
+if [[ -n "$CODEX_SHELL" ]]; then
+  alias ls="eza --git"
+  alias ll="eza -al --git"
+else
+  alias ls="eza --icons --git"
+  alias ll="eza -al --icons --git"
+fi
 alias cat="bat --theme='ansi'"
 
 # Utilities
@@ -234,4 +239,3 @@ ccbuild() {
   echo "📦 Building custom CC Switch production app..."
   (cd "$HOME/Documents/GitHub/config/dotfiles/tools/cc-switch" && pnpm install && pnpm tauri build)
 }
-
