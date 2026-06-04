@@ -19,8 +19,7 @@
 - [Philosophy](#-philosophy)
 - [Continuous Improvement](#-continuous-improvement)
 - [Personal Dotfiles](#-personal-dotfiles-the-original-purpose)
-- [Contributing](#-contributing)
-- [Contact](#-contact)
+
 
 ---
 
@@ -709,8 +708,9 @@ The agent can post reviews directly to PRs using GitHub MCP tools:
 Use the `/generate-pr-review` command to create a project-specific PR reviewer that combines global rules with your project's conventions. The generator analyzes:
 - Existing AI/LLM configs (`.cursorrules`, `CLAUDE.md`, `.github/copilot-instructions.md`)
 - Architecture Decision Records (ADRs)
-- Project documentation (`CONTRIBUTING.md`, `DEVELOPMENT.md`)
+- Project documentation (e.g., `CONTEXT.md`, `AGENTS.md`)
 - Tech stack and existing code patterns
+
 
 ---
 
@@ -747,7 +747,7 @@ Claude Code: [Launches use-case-data-patterns agent]
 | "I want this on all my personal projects" | [Option 1: Global Install](#option-1-install-to-claude-global-personal-config--recommended) |
 | "I'm setting this up for my team" | [Option 2: Project-specific install](#option-2-use-claudemd--agents-recommended-for-projects) |
 | "I just want to try the guidelines first" | [Option 3: CLAUDE.md only](#option-3-use-claudemd-only-minimal) |
-| "I need to customize for my team's standards" | [Option 4: Fork and customize](#option-4-fork-and-customize-advanced) |
+
 
 ---
 
@@ -982,25 +982,6 @@ curl -o .claude/CLAUDE.md https://raw.githubusercontent.com/citypaul/.dotfiles/v
 
 This gives you the complete guidelines (1,818 lines) in a single standalone file.
 
----
-
-### Option 4: Fork and Customize (Advanced)
-
-**Best for:** Teams with specific standards who need full customization control
-
-**Why choose this:**
-- ✅ Complete control over guidelines and enforcement
-- ✅ Customize for your team's specific tech stack
-- ✅ Modify agent behavior to match your workflow
-- ✅ Maintain team-specific patterns and anti-patterns
-
-**How to customize:**
-
-1. Fork this repository
-2. Modify CLAUDE.md to match your team's preferences
-3. Customize agents to enforce your specific rules
-4. Commit to your fork
-5. Pull into your projects
 
 ---
 
@@ -1259,27 +1240,8 @@ Feel free to browse the repository and cherry-pick what's useful:
 
 **Note:** These are my personal preferences. Review before installing - you may want to customize them for your workflow.
 
----
 
-## 🤝 Contributing
 
-This is a personal repository that became unexpectedly popular. Contributions are welcome, especially:
-
-- **Improvements to CLAUDE.md** - Better decision frameworks, clearer examples
-- **Agent enhancements** - New checks, better error messages
-- **Documentation** - Clarifications, additional examples
-- **Real-world feedback** - What worked? What didn't?
-
-Please open issues or PRs on GitHub.
-
----
-
-## 📞 Contact
-
-**Paul Hammond**
-
-- [LinkedIn](https://www.linkedin.com/in/paul-hammond-bb5b78251/) - Feel free to connect and discuss
-- [GitHub Issues](https://github.com/citypaul/.dotfiles/issues) - Questions, suggestions, feedback
 
 ---
 
@@ -1299,15 +1261,4 @@ Special thanks to contributors who have shared their work:
 
 This repository is open source and available for use. The CLAUDE.md file and agents are designed to be copied and customized for your projects.
 
----
 
-## ⭐ If This Helped You
-
-If you found CLAUDE.md or the agents valuable, consider:
-
-- Starring this repo on GitHub
-- Sharing it with your team
-- Contributing improvements back
-- Connecting on LinkedIn to share your experience
-
-The more people who adopt these practices, the better the AI-assisted development ecosystem becomes for everyone.
