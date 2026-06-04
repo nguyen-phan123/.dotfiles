@@ -1,0 +1,37 @@
+schema:spec-driven
+
+# Project context (optional)
+context: |
+  Domain: Dotfiles and AI Agent Ecosystem.
+  Tech Stack: Zsh, Oh-My-Zsh, GNU Stow, changesets, pnpm, rtk (Rust Token Killer).
+  Directory Structure:
+    - GNU Stow maps directories under: coding/, shell/, system/, terminal/ to $HOME.
+    - Domain docs: CONTEXT.md, docs/agents/domain.md, docs/agents/issue-tracker.md.
+  Code Style & Guidelines:
+    - Shell scripts: Must include `set -euo pipefail`. Use `local` variables. Always use cross-platform paths ($HOME, ~), never hardcoded paths like /Users/username.
+    - Configuration: Strict JSON (no trailing commas), strict YAML (2-space indentation).
+    - Aliases: Logically grouped inside shell/zsh/.zsh_profile.
+  Git Workflow:
+    - Commits: Angular-style `<type>(<scope>): <subject>` (e.g., feat(install): ...).
+    - Security: Never commit secrets. Manage local configs via .zshrc.local.example.
+  CLI Command Execution:
+    - ALWAYS prefix terminal commands with `rtk` (e.g., `rtk git status`, `rtk pnpm test`, `rtk pnpm lint`).
+    - RTK automatically intercepts and optimizes outputs.
+
+# Per-artifact rules (optional)
+rules:
+  proposal:
+    - Keep proposals concise and highly focused.
+    - Must include a "Non-goals" section.
+    - Reference existing vocab in CONTEXT.md and docs/agents/domain.md.
+    - For configuration/path designs, ensure cross-platform conventions are followed (avoid hardcoded absolute home directories).
+  tasks:
+    - Break down tasks into independent, atomic checklist items.
+    - Reference specific agent skills or workflows when applicable (e.g. TDD, triage, diagnose).
+    - Specify that validation commands must run with `rtk` prefixes.
+  spec:
+    - Follow the ADR (Architecture Decision Record) format in docs/adr/ if applicable.
+    - Ensure configuration templates/samples use strict format rules (no trailing commas in JSON, 2-space indentation in YAML).
+  walkthrough:
+    - Summarize precisely what was tested, changes made, and validation results.
+    - Embed screenshots or recordings if applicable using absolute paths.
