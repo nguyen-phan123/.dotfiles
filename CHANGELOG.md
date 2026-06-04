@@ -859,7 +859,7 @@ CLAUDE.md has been split from a single 1,818-line file into a modular structure:
 - If you manually created symlinks or custom imports, you'll need to update paths
 - The file structure has changed (though the monolithic version still works if you have it)
 
-**Migration:** See [MIGRATION.md](MIGRATION.md) for detailed upgrade instructions.
+**Migration:** See [migration-v1-to-v2.md](docs/archive/migration-v1-to-v2.md) for detailed upgrade instructions.
 
 ### Added
 
@@ -876,7 +876,7 @@ CLAUDE.md has been split from a single 1,818-line file into a modular structure:
 
 - `package.json` - Version tracking (not an npm package, just for semver)
 - `CHANGELOG.md` - This file
-- `MIGRATION.md` - Upgrade guide from v1.x to v2.x
+- `docs/archive/migration-v1-to-v2.md` - Upgrade guide from v1.x to v2.x
 
 ### Changed
 
@@ -886,7 +886,7 @@ CLAUDE.md has been split from a single 1,818-line file into a modular structure:
 
 ### Documentation
 
-- Updated [SPLIT-CLAUDE-MD-PLAN.md](SPLIT-CLAUDE-MD-PLAN.md) with absolute path requirements
+- Updated [split-claude-md-plan.md](docs/archive/split-claude-md-plan.md) with absolute path requirements
 - Documented why absolute paths are required for dotfiles installation
 - Added examples showing project vs dotfiles import syntax differences
 

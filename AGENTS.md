@@ -1,29 +1,58 @@
-# Memory
+# 🧠 Agent Workspace Memory (AGENTS.md)
 
-## Project Overview
-See @README.md for project overview and @package.json for available npm/pnpm commands for this project.
+Welcome to the **Dotfiles & Agent Ecosystem** repository. This memory file defines the code style, commands, workflows, and standards enforced across this workspace.
 
-## Code Style Guidelines
-- Use descriptive variable names
-- Follow existing patterns in the codebase
-- Extract complex conditions into meaningful boolean variables
+---
 
-## Architecture Notes
-Add important architectural decisions and patterns here.
+## 1. 🛠️ Commands & Tooling
 
-## Common Workflows
-Document frequently used workflows and commands here.
+Standard scripts and task runner commands:
 
-## Agent skills
+| Command | Action | Description |
+| :--- | :--- | :--- |
+| `pnpm install` | Install deps | Installs development tools and changesets dependencies. |
+| `pnpm test` | Run tests | Runs unit tests for configuration scripts and helper functions. |
+| `pnpm lint` | Code linting | Checks formatting of scripts, JSON, and yaml configurations. |
+| `./install.sh` | Symlink stow | Installs all packages using GNU Stow dynamically to `$HOME`. |
 
-### Issue tracker
+---
 
-Issues are tracked using Local Markdown Files. See `docs/agents/issue-tracker.md`.
+## 2. 📝 Code Style & Guidelines
 
-### Triage labels
+Ensure maximum compatibility and clean code when writing configuration files and scripts:
 
-Using standard triage label vocabulary. See `docs/agents/triage-labels.md`.
+### Zsh & Shell Scripting
+*   **Safety Headers**: Always use `set -euo pipefail` at the start of all helper shell scripts.
+*   **Variable Scope**: Use `local` variables inside shell functions to avoid polluting environment namespaces.
+*   **Cross-Platform Paths**: Avoid hardcoded home directory paths (`/Users/username`); always use the `$HOME` or `~` environment variables.
 
-### Domain docs
+### Configuration Formatting
+*   **Strict JSON/YAML**: Ensure no trailing commas in JSON files (e.g., `.vscode/settings.json`), and adhere to 2-space indentation for YAML configurations.
+*   **Clean Aliases**: Group aliases logically by application/tool inside [shell/zsh/.zsh_profile](file:///Users/diqit/Documents/GitHub/config/dotfiles/shell/zsh/.zsh_profile).
 
-Single-context layout with root CONTEXT.md and docs/adr/. See `docs/agents/domain.md`.
+---
+
+## 3. ⚙️ Tooling Configuration
+
+*   **GNU Stow Structure**: Standard configuration folders are categorized under parent directories like [coding/](file:///Users/diqit/Documents/GitHub/config/dotfiles/coding/), [shell/](file:///Users/diqit/Documents/GitHub/config/dotfiles/shell/), [system/](file:///Users/diqit/Documents/GitHub/config/dotfiles/system/), and [terminal/](file:///Users/diqit/Documents/GitHub/config/dotfiles/terminal/). Stow maps these directly to `$HOME`.
+*   **Changesets**: Package versioning is automated using Changesets. Do not bump versions manually in `package.json`.
+
+---
+
+## 🐙 4. Git Workflows & Commit Format
+
+*   **Format**: Use standard angular-style prefix formatting: `<type>(<scope>): <subject>` (e.g., `feat(install): add support for machine-local configurations`).
+*   **Token Protection**: Never check in secrets (e.g., API keys, client secrets). All local configs must be gitignored or managed through template files like `.zshrc.local.example`.
+
+---
+
+## 🤖 5. Agent Workflows & Skills
+
+### Available Slash Commands
+*   `/goal`: Use when launching long-running automated optimization cycles.
+*   `/schedule`: Set timers or recurring background tasks.
+*   `/grill-me`: Engage in an interactive query loop to stress-test your design decisions before writing code.
+
+### Domain Documentation & Contexts
+*   **Issue Tracker**: Log tickets and progress inside local markdown files. See [issue-tracker.md](file:///Users/diqit/Documents/GitHub/config/dotfiles/docs/agents/issue-tracker.md).
+*   **Domain docs**: Check [domain.md](file:///Users/diqit/Documents/GitHub/config/dotfiles/docs/agents/domain.md) and [CONTEXT.md](file:///Users/diqit/Documents/GitHub/config/dotfiles/CONTEXT.md) for terminology mappings and architectural constraints.
