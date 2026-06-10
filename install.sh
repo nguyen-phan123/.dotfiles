@@ -186,7 +186,7 @@ backup_and_remove() {
 # 3. Handle specific conflicts (only for relevant packages)
 get_conflicts() {
   case "$1" in
-    zsh)        echo ".zshrc .zsh_profile .nvm_setup .pyenv_setup.sh .zshenv .zshrc.local.example .flutter_setup" ;;
+    zsh)        echo ".zshrc .zsh_profile .nvm_setup .pyenv_setup.sh .zshenv .zshrc.local.example .flutter_setup .p10k.zsh" ;;
     .oh-my-zsh) echo ".oh-my-zsh/custom/plugins/zsh-autosuggestions .oh-my-zsh/custom/plugins/zsh-you-should-use" ;;
     tmux)       echo ".tmux.conf .tmux.conf.local" ;;
     gnupg)      echo ".gnupg" ;;
