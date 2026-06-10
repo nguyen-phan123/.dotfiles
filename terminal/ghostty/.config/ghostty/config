@@ -5,4 +5,4 @@ macos-auto-secure-input = true
 macos-secure-input-indication = true
 font-family = "MesloLGS Nerd Font"
 font-size = 14
-theme = catppuccin-mocha
+theme = "Catppuccin Mocha"
