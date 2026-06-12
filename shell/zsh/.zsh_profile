@@ -214,10 +214,10 @@ alias fbgen="fvm dart run build_runner build --delete-conflicting-outputs"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# MCP Config Sync & Restart AI Clients
-mcpsync() {
-  echo "🔄 Running MCP Config Sync..."
-  node "$HOME/mcp/sync.js"
+# Gemini & Antigravity Config, Skills, and Plugins Sync
+geminisync() {
+  echo "🔄 Running Gemini & Antigravity Sync..."
+  node "$HOME/.sync-gemini.js"
   
   echo "🔄 Restarting Claude Desktop..."
   if killall "Claude" 2>/dev/null; then
@@ -228,6 +228,7 @@ mcpsync() {
     echo "⚠️ Claude Desktop was not running."
   fi
 }
+alias mcpsync="geminisync"
 
 # CC Switch custom app commands
 ccdev() {

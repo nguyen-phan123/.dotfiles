@@ -5,7 +5,7 @@
   "description": "Personal dotfiles including CLAUDE.md development framework and Claude Code agents",
   "repository": {
     "type": "git",
-    "url": "https://github.com/citypaul/.dotfiles.git"
+    "url": "https://github.com/nguyen-phan123/.dotfiles.git"
   },
   "keywords": [
     "claude-code",

@@ -1,0 +1,22 @@
+name: rapid-fix
+version: 1
+description: Quy trình triển khai tinh gọn dành cho các bản vá lỗi khẩn cấp (hotfix) hoặc bổ sung tính năng nhỏ vào các đặc tả (specs) đã được lưu trữ.
+artifacts:
+  - id: issue
+    generates: issue.md
+    description: Mô tả chi tiết vấn đề phát sinh, lỗi hoặc yêu cầu bổ sung.
+    template: issue.md
+    requires: []
+  - id: tasks
+    generates: tasks.md
+    description: Danh sách các tác vụ cần triển khai để giải quyết vấn đề.
+    template: tasks.md
+    requires:
+      - issue
+    skills:
+      - commit-work
+      - verification-before-completion
+apply:
+  requires:
+    - tasks
+  tracks: tasks.md

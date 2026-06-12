@@ -30,12 +30,8 @@ source $HOME/.zsh_profile
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# Added by Antigravity IDE
-export PATH="/Users/diqit/.antigravity-ide/antigravity-ide/bin:$PATH"
-
-# Added by Antigravity IDE
-export PATH="/Users/diqit/.antigravity-ide/antigravity-ide/bin:$PATH"
-
-
 # Added by Antigravity CLI installer
 export PATH="/Users/diqit/.local/bin:$PATH"
+
+# Added by Antigravity IDE
+export PATH="/Users/diqit/.antigravity-ide/antigravity-ide/bin:$PATH"

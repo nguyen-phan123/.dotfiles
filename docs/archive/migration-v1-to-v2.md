@@ -11,8 +11,8 @@ This guide helps you upgrade from the monolithic `CLAUDE.md` (v1.x) to the modul
 ~/.claude/
 └── CLAUDE.md (1,818 lines - everything in one file)
 ```
-*   **View v1.0.0 monolithic file**: [GitHub Commit v1.0.0](https://github.com/citypaul/.dotfiles/blob/v1.0.0/claude/.claude/CLAUDE.md)
-*   **Raw download**: [Raw monolithic CLAUDE.md](https://github.com/citypaul/.dotfiles/raw/v1.0.0/claude/.claude/CLAUDE.md)
+*   **View v1.0.0 monolithic file**: [GitHub Commit v1.0.0](https://github.com/nguyen-phan123/.dotfiles/blob/v1.0.0/claude/.claude/CLAUDE.md)
+*   **Raw download**: [Raw monolithic CLAUDE.md](https://github.com/nguyen-phan123/.dotfiles/raw/v1.0.0/claude/.claude/CLAUDE.md)
 
 ### After (v2.0.0)
 ```
@@ -77,7 +77,7 @@ cp ~/.claude/CLAUDE.md ~/.claude/CLAUDE.md.v1.backup
 
 # 2. Install new structure
 cd /tmp
-git clone https://github.com/citypaul/.dotfiles.git
+git clone https://github.com/nguyen-phan123/.dotfiles.git
 cd .dotfiles
 
 # 3. Copy all files
@@ -97,7 +97,7 @@ cd ~/.dotfiles
 git checkout v1.0.0
 
 # Or download the specific version
-curl -L https://github.com/citypaul/.dotfiles/raw/v1.0.0/claude/.claude/CLAUDE.md \
+curl -L https://github.com/nguyen-phan123/.dotfiles/raw/v1.0.0/claude/.claude/CLAUDE.md \
   -o ~/.claude/CLAUDE.md
 ```
 
@@ -218,7 +218,7 @@ git checkout v1.0.0
 stow -R -t ~ claude
 
 # Or download directly
-curl -L https://github.com/citypaul/.dotfiles/raw/v1.0.0/claude/.claude/CLAUDE.md \
+curl -L https://github.com/nguyen-phan123/.dotfiles/raw/v1.0.0/claude/.claude/CLAUDE.md \
   -o ~/.claude/CLAUDE.md
 
 # Remove docs directory if you don't want it
