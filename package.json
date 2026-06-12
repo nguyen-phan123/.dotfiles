@@ -19,7 +19,10 @@
   "scripts": {
     "changeset": "changeset",
     "version": "changeset version",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "install": "./install.sh",
+    "update": "git pull && ./install.sh",
+    "sync": "node shell/zsh/.sync-gemini.js"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1"
