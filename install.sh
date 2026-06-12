@@ -7,7 +7,7 @@ BACKUP_DIR="$HOME/dotfiles_backup/$(date +%Y%m%d_%H%M%S)"
 
 # Configuration
 GPG_AGENT_CONF=system/gnupg/.gnupg/gpg-agent.conf
-ALL_PACKAGES=(zsh tmux gnupg zellij .oh-my-zsh karabiner ghostty nvim lvim cmux)
+ALL_PACKAGES=(zsh tmux gnupg zellij .oh-my-zsh karabiner ghostty nvim lvim cmux pip)
 
 # Parse arguments
 ONLY_PACKAGES=()
@@ -148,7 +148,7 @@ get_category() {
     zsh|.oh-my-zsh) echo "shell" ;;
     tmux|zellij|ghostty|cmux) echo "terminal" ;;
     nvim|lvim) echo "coding" ;;
-    gnupg|karabiner) echo "system" ;;
+    gnupg|karabiner|pip) echo "system" ;;
   esac
 }
 
@@ -194,6 +194,7 @@ get_conflicts() {
     karabiner)  echo ".config/karabiner" ;;
     ghostty)    echo ".config/ghostty" ;;
     cmux)       echo ".config/cmux" ;;
+    pip)        echo ".config/pip" ;;
     nvim)       echo "init.lua lazy-lock.json lua .config/nvim" ;;
     lvim)       echo ".config/lvim .local/bin/lvim" ;;
   esac
