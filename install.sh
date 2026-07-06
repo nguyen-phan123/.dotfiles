@@ -152,6 +152,9 @@ get_category() {
   esac
 }
 
+BACKUP_COUNT=0
+REMOVE_COUNT=0
+
 # 3. Backup function
 backup_and_remove() {
     local rel_path="$1"
@@ -159,9 +162,9 @@ backup_and_remove() {
     local target="$HOME/$rel_path"
     
     if [ -e "$target" ] && [ ! -L "$target" ]; then
-        echo "📦 Backing up existing file: $rel_path"
         mkdir -p "$(dirname "$BACKUP_DIR/$rel_path")"
         mv "$target" "$BACKUP_DIR/$rel_path"
+        BACKUP_COUNT=$((BACKUP_COUNT + 1))
     elif [ -L "$target" ]; then
         # Resolve target to absolute path using python
         local resolved_target=$(python3 -c "import os; print(os.path.realpath('$target'))" 2>/dev/null || true)
@@ -169,15 +172,15 @@ backup_and_remove() {
         if [ -z "$resolved_target" ]; then
             local link_target=$(readlink "$target")
             if [[ "$link_target" != *"/dotfiles/"* ]]; then
-                echo "🔗 Removing alien symlink (fallback): $rel_path"
                 rm "$target"
+                REMOVE_COUNT=$((REMOVE_COUNT + 1))
             fi
         else
             # If resolved path does NOT match the expected new package path, it is outdated
             local expected_path="$DOTFILES_DIR/$(get_category "$pkg")/$pkg"
             if [[ "$resolved_target" != "$expected_path"* ]]; then
-                echo "🔗 Removing alien/outdated symlink: $rel_path (points to: $resolved_target)"
                 rm "$target"
+                REMOVE_COUNT=$((REMOVE_COUNT + 1))
             fi
         fi
     fi
@@ -200,7 +203,7 @@ get_conflicts() {
   esac
 }
 
-echo "🧹 Preparing cleanup..."
+echo "🧹 [1/3] Cleaning up conflicts..."
 mkdir -p "$BACKUP_DIR"
 
 for pkg in "${PACKAGES[@]}"; do
@@ -208,12 +211,36 @@ for pkg in "${PACKAGES[@]}"; do
     backup_and_remove "$conflict" "$pkg"
   done
 done
+echo "🧹 [1/3] Cleanup complete (backed up $BACKUP_COUNT files, removed $REMOVE_COUNT outdated links)."
+
+# 2. Backup summary
+if [ "$BACKUP_COUNT" -gt 0 ]; then
+  echo "📦 [2/3] Backed up conflicting files to: $BACKUP_DIR"
+else
+  # Clean up empty backup directory if nothing was backed up
+  rmdir "$BACKUP_DIR" 2>/dev/null || true
+  echo "📦 [2/3] No conflicting files to backup."
+fi
 
 # 4. Stow
-echo "🔗 Linking dotfiles: ${PACKAGES[*]}"
+echo "🔗 [3/3] Linking packages: ${PACKAGES[*]}... [RUNNING]"
+STOW_ERR_FILE=$(mktemp)
+STOW_FAILED=0
 for pkg in "${PACKAGES[@]}"; do
   category=$(get_category "$pkg")
-  stow --verbose -d "$DOTFILES_DIR/$category" --target="$HOME" --restow "$pkg"
+  if ! stow -d "$DOTFILES_DIR/$category" --target="$HOME" --restow "$pkg" >"$STOW_ERR_FILE" 2>&1; then
+    STOW_FAILED=1
+    break
+  fi
 done
 
-echo "✨ Done! Backup created at $BACKUP_DIR"
+if [ "$STOW_FAILED" -eq 0 ]; then
+  echo "🔗 [3/3] Linking packages: ${PACKAGES[*]}... [DONE]"
+  echo "✨ Done! Dotfiles installation complete."
+else
+  echo "❌ Error linking packages:"
+  cat "$STOW_ERR_FILE"
+  rm -f "$STOW_ERR_FILE"
+  exit 1
+fi
+rm -f "$STOW_ERR_FILE"

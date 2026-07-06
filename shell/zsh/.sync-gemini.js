@@ -6,9 +6,6 @@ function syncMcp() {
   const homeDir = os.homedir();
   const sourcePath = path.join(homeDir, '.gemini', 'settings.json');
 
-  console.log('🔍 Checking source...');
-  console.log(`Source: ${sourcePath}`);
-
   if (!fs.existsSync(sourcePath)) {
     console.error(`❌ Source settings file not found: ${sourcePath}`);
     process.exit(1);
@@ -26,8 +23,7 @@ function syncMcp() {
   const sourceServers = sourceSettings.mcpServers || {};
   const sourceServerKeys = Object.keys(sourceServers);
   if (sourceServerKeys.length === 0) {
-    console.log('⚠️ No MCP servers found in source settings.');
-    return;
+    return { skipped: true, reason: 'No MCP servers found in settings.json' };
   }
 
   const targets = [
@@ -48,94 +44,82 @@ function syncMcp() {
     }
   ];
 
+  const results = {};
+
   for (const target of targets) {
     const targetPath = path.join(target.dir, target.file);
     const backupPath = path.join(target.dir, `${target.file}.bak`);
 
-    console.log(`\n🔄 Syncing MCP configuration to ${target.label}...`);
-    console.log(`Target: ${targetPath}`);
-
-    // Ensure target directory exists
-    if (!fs.existsSync(target.dir)) {
-      console.log(`📁 Creating target directory: ${target.dir}`);
-      fs.mkdirSync(target.dir, { recursive: true });
-    }
-
-    let targetConfig = { mcpServers: {} };
-    if (fs.existsSync(targetPath)) {
-      try {
-        const targetContent = fs.readFileSync(targetPath, 'utf8');
-        targetConfig = JSON.parse(targetContent);
-        if (!targetConfig.mcpServers) {
-          targetConfig.mcpServers = {};
-        }
-      } catch (err) {
-        console.warn(`⚠️ Failed to parse existing target config, initializing new: ${err.message}`);
-      }
-    }
-
-    // Create backup if target exists
-    if (fs.existsSync(targetPath)) {
-      try {
-        fs.copyFileSync(targetPath, backupPath);
-        console.log(`💾 Created backup at ${backupPath}`);
-      } catch (err) {
-        console.warn(`⚠️ Failed to create backup: ${err.message}`);
-      }
-    }
-
-    // Merge logic
-    let updatedCount = 0;
-    let addedCount = 0;
-
-    for (const serverName of sourceServerKeys) {
-      const sourceServer = sourceServers[serverName];
-      if (targetConfig.mcpServers[serverName]) {
-        updatedCount++;
-      } else {
-        addedCount++;
-      }
-
-      const existingServer = targetConfig.mcpServers[serverName] || {};
-      
-      // Perform deep-merge of environment variables
-      const mergedEnv = Object.assign(
-        {},
-        existingServer.env || {},
-        sourceServer.env || {}
-      );
-
-      // Merge server configuration
-      targetConfig.mcpServers[serverName] = Object.assign(
-        {},
-        existingServer,
-        sourceServer,
-        { env: mergedEnv }
-      );
-    }
-
-    // Write updated configuration with 2-spaces indentation
     try {
+      // Ensure target directory exists
+      if (!fs.existsSync(target.dir)) {
+        fs.mkdirSync(target.dir, { recursive: true });
+      }
+
+      let targetConfig = { mcpServers: {} };
+      if (fs.existsSync(targetPath)) {
+        try {
+          const targetContent = fs.readFileSync(targetPath, 'utf8');
+          targetConfig = JSON.parse(targetContent);
+          if (!targetConfig.mcpServers) {
+            targetConfig.mcpServers = {};
+          }
+        } catch (err) {
+          // ignore and initialize new
+        }
+      }
+
+      // Create backup if target exists
+      if (fs.existsSync(targetPath)) {
+        try {
+          fs.copyFileSync(targetPath, backupPath);
+        } catch (err) {
+          // ignore backup fail
+        }
+      }
+
+      let updatedCount = 0;
+      let addedCount = 0;
+
+      for (const serverName of sourceServerKeys) {
+        const sourceServer = sourceServers[serverName];
+        if (targetConfig.mcpServers[serverName]) {
+          updatedCount++;
+        } else {
+          addedCount++;
+        }
+
+        const existingServer = targetConfig.mcpServers[serverName] || {};
+        const mergedEnv = Object.assign(
+          {},
+          existingServer.env || {},
+          sourceServer.env || {}
+        );
+
+        targetConfig.mcpServers[serverName] = Object.assign(
+          {},
+          existingServer,
+          sourceServer,
+          { env: mergedEnv }
+        );
+      }
+
       fs.writeFileSync(targetPath, JSON.stringify(targetConfig, null, 2) + '\n', 'utf8');
-      console.log(`✨ Successfully synchronized to ${target.label}!`);
-      console.log(`   - Added: ${addedCount} servers`);
-      console.log(`   - Updated/Merged: ${updatedCount} servers`);
+      results[target.label] = { added: addedCount, updated: updatedCount, success: true };
     } catch (err) {
-      console.error(`❌ Failed to write target config for ${target.label}: ${err.message}`);
+      results[target.label] = { error: err.message, success: false };
     }
   }
+
+  return { skipped: false, results };
 }
 
 function syncSkills() {
   const homeDir = os.homedir();
   const sourceSkillsDir = path.join(homeDir, '.gemini', 'skills');
 
-  console.log('\n🔄 Running Agent Skills Sync...');
-  console.log(`Source Skills Dir: ${sourceSkillsDir}`);
-
   if (!fs.existsSync(sourceSkillsDir)) {
-    console.log('⚠️ Central skills directory not found. Skipping skills sync.');
-    return;
+    return { skipped: true, reason: 'Central skills directory not found' };
   }
 
   const activeSkills = [];
@@ -156,12 +140,11 @@ function syncSkills() {
           targetPath: targetPath
         });
       } catch (e) {
-        console.warn(`⚠️ Failed to read skill stat/link for ${item}: ${e.message}`);
+        // ignore
       }
     }
   } catch (err) {
-    console.error(`❌ Failed to read central skills: ${err.message}`);
-    return;
+    return { skipped: true, reason: `Failed to read central skills: ${err.message}` };
   }
 
   const targets = [
@@ -179,107 +162,81 @@ function syncSkills() {
     }
   ];
 
+  const results = {};
+
   for (const target of targets) {
     const targetSkillsDir = target.dir;
-    console.log(`\nSyncing skills to ${target.label}...`);
-    console.log(`Target: ${targetSkillsDir}`);
+    let syncedCount = 0;
 
-    let isDirOrSymlink = false;
-    let isBrokenSymlink = false;
     try {
-      const stat = fs.lstatSync(targetSkillsDir);
-      isDirOrSymlink = stat.isDirectory() || stat.isSymbolicLink();
-      if (stat.isSymbolicLink()) {
-        try {
-          fs.statSync(targetSkillsDir);
-        } catch (e) {
-          isBrokenSymlink = true;
-        }
-      }
-    } catch (e) {}
-
-    if (isBrokenSymlink) {
-      console.log(`🗑️ Removing broken symlink at: ${targetSkillsDir}`);
+      let isDirOrSymlink = false;
+      let isBrokenSymlink = false;
       try {
+        const stat = fs.lstatSync(targetSkillsDir);
+        isDirOrSymlink = stat.isDirectory() || stat.isSymbolicLink();
+        if (stat.isSymbolicLink()) {
+          try {
+            fs.statSync(targetSkillsDir);
+          } catch (e) {
+            isBrokenSymlink = true;
+          }
+        }
+      } catch (e) {}
+
+      if (isBrokenSymlink) {
         fs.unlinkSync(targetSkillsDir);
         isDirOrSymlink = false;
-      } catch (e) {
-        console.error(`❌ Failed to delete broken symlink ${targetSkillsDir}: ${e.message}`);
       }
-    }
 
-    if (!isDirOrSymlink) {
-      try {
+      if (!isDirOrSymlink) {
         fs.mkdirSync(targetSkillsDir, { recursive: true });
-        console.log(`📁 Created directory: ${targetSkillsDir}`);
+      }
+
+      let targetItems = [];
+      try {
+        targetItems = fs.readdirSync(targetSkillsDir);
       } catch (e) {
-        console.error(`❌ Failed to create skills directory ${targetSkillsDir}: ${e.message}`);
-        continue;
+        // ignore
       }
-    }
 
-    // Read existing files in target
-    let targetItems = [];
-    try {
-      targetItems = fs.readdirSync(targetSkillsDir);
-    } catch (e) {
-      console.warn(`⚠️ Failed to read target skills directory ${targetSkillsDir}: ${e.message}`);
-      continue;
-    }
+      const activeSkillNames = new Set(activeSkills.map(s => s.name));
 
-    // Map active skill names for quick lookup
-    const activeSkillNames = new Set(activeSkills.map(s => s.name));
+      for (const item of targetItems) {
+        if (item === 'skills-lock.json') continue;
 
-    // Pruning: remove any symlink/directory in target that is not active
-    for (const item of targetItems) {
-      if (item === 'skills-lock.json') continue;
+        const itemPath = path.join(targetSkillsDir, item);
+        let isTargetSymlink = false;
+        let isTargetDir = false;
+        try {
+          const stat = fs.lstatSync(itemPath);
+          isTargetSymlink = stat.isSymbolicLink();
+          isTargetDir = stat.isDirectory();
+        } catch (e) {}
 
-      const itemPath = path.join(targetSkillsDir, item);
-      let isTargetSymlink = false;
-      let isTargetDir = false;
-      try {
-        const stat = fs.lstatSync(itemPath);
-        isTargetSymlink = stat.isSymbolicLink();
-        isTargetDir = stat.isDirectory();
-      } catch (e) {}
-
-      if (!activeSkillNames.has(item)) {
-        if (isTargetSymlink) {
-          try {
+        if (!activeSkillNames.has(item)) {
+          if (isTargetSymlink) {
             fs.unlinkSync(itemPath);
-            console.log(`🗑️ Pruned obsolete symlink: ${item}`);
-          } catch (e) {
-            console.warn(`⚠️ Failed to delete obsolete link ${itemPath}: ${e.message}`);
-          }
-        } else if (isTargetDir) {
-          try {
+          } else if (isTargetDir) {
             fs.rmSync(itemPath, { recursive: true, force: true });
-            console.log(`🗑️ Pruned obsolete directory: ${item}`);
-          } catch (e) {
-            console.warn(`⚠️ Failed to delete obsolete directory ${itemPath}: ${e.message}`);
           }
         }
       }
-    }
 
-    // Syncing: create symlink for each active skill if it doesn't exist or points to wrong target
-    let syncedCount = 0;
-    for (const skill of activeSkills) {
-      const destPath = path.join(targetSkillsDir, skill.name);
-      
-      let exists = false;
-      let existingTarget = null;
-      try {
-        const stat = fs.lstatSync(destPath);
-        exists = true;
-        if (stat.isSymbolicLink()) {
-          existingTarget = fs.readlinkSync(destPath);
-        }
-      } catch (e) {}
+      for (const skill of activeSkills) {
+        const destPath = path.join(targetSkillsDir, skill.name);
+        
+        let exists = false;
+        let existingTarget = null;
+        try {
+          const stat = fs.lstatSync(destPath);
+          exists = true;
+          if (stat.isSymbolicLink()) {
+            existingTarget = fs.readlinkSync(destPath);
+          }
+        } catch (e) {}
 
-      if (exists) {
-        if (existingTarget !== skill.targetPath) {
-          try {
+        if (exists) {
+          if (existingTarget !== skill.targetPath) {
             const destStat = fs.lstatSync(destPath);
             if (destStat.isDirectory() && !destStat.isSymbolicLink()) {
               fs.rmSync(destPath, { recursive: true, force: true });
@@ -288,23 +245,79 @@ function syncSkills() {
             }
             fs.symlinkSync(skill.targetPath, destPath, 'dir');
             syncedCount++;
-          } catch (e) {
-            console.error(`❌ Failed to recreate symlink for ${skill.name}: ${e.message}`);
           }
-        }
-      } else {
-        try {
+        } else {
           fs.symlinkSync(skill.targetPath, destPath, 'dir');
           syncedCount++;
-        } catch (e) {
-          console.error(`❌ Failed to create symlink for ${skill.name} pointing to ${skill.targetPath}: ${e.message}`);
         }
       }
-    }
 
-    console.log(`✨ Synchronized ${syncedCount} skills for ${target.label}`);
+      results[target.label] = { synced: syncedCount, success: true };
+    } catch (err) {
+      results[target.label] = { error: err.message, success: false };
+    }
   }
+
+  return { skipped: false, results };
 }
 
-syncMcp();
-syncSkills();
+const mcp = syncMcp();
+const skills = syncSkills();
+
+console.log('\n🔄 Syncing MCP & Skills Configuration:');
+
+const environments = [
+  'Antigravity IDE',
+  'Antigravity',
+  'Antigravity CLI / Gemini Config'
+];
+
+const labelWidth = 31;
+const mcpWidth = 22;
+const skillsWidth = 15;
+
+const horizontalLine = `┌${'─'.repeat(labelWidth + 2)}┬${'─'.repeat(mcpWidth + 2)}┬${'─'.repeat(skillsWidth + 2)}┐`;
+const dividerLine = `├${'─'.repeat(labelWidth + 2)}┼${'─'.repeat(mcpWidth + 2)}┼${'─'.repeat(skillsWidth + 2)}┤`;
+const bottomLine = `└${'─'.repeat(labelWidth + 2)}┴${'─'.repeat(mcpWidth + 2)}┴${'─'.repeat(skillsWidth + 2)}┘`;
+
+function pad(str, width) {
+  return str + ' '.repeat(Math.max(0, width - str.length));
+}
+
+console.log(horizontalLine);
+console.log(`│ ${pad('Environment', labelWidth)} │ ${pad('MCP Sync', mcpWidth)} │ ${pad('Skills Sync', skillsWidth)} │`);
+console.log(dividerLine);
+
+for (const env of environments) {
+  let mcpText = '';
+  if (mcp.skipped) {
+    mcpText = 'Skipped';
+  } else {
+    const res = mcp.results[env];
+    if (!res) {
+      mcpText = 'N/A';
+    } else if (!res.success) {
+      mcpText = `Error: ${res.error.substring(0, 15)}`;
+    } else {
+      mcpText = `+${res.added} / ~${res.updated}`;
+    }
+  }
+
+  let skillsText = '';
+  if (skills.skipped) {
+    skillsText = 'Skipped';
+  } else {
+    const res = skills.results[env];
+    if (!res) {
+      skillsText = 'N/A';
+    } else if (!res.success) {
+      skillsText = `Error: ${res.error.substring(0, 8)}`;
+    } else {
+      skillsText = `${res.synced} skills`;
+    }
+  }
+
+  console.log(`│ ${pad(env, labelWidth)} │ ${pad(mcpText, mcpWidth)} │ ${pad(skillsText, skillsWidth)} │`);
+}
+
+console.log(bottomLine);

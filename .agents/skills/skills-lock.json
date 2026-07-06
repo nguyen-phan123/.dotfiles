@@ -79,12 +79,6 @@
       "skillPath": "skills/writing-plans/SKILL.md",
       "computedHash": "2b986445454a025ca2c3839f8a2024747e8cce0517948437232cd113d2719060"
     },
-    "safe-branch-switching": {
-      "source": "obra/superpowers",
-      "sourceType": "github",
-      "skillPath": "skills/safe-branch-switching/SKILL.md",
-      "computedHash": "8c2d865f34251515249b369666507437e95dae64be8ca1440e3382af64e8af3d"
-    },
     "writing-skills": {
       "source": "obra/superpowers",
       "sourceType": "github",
