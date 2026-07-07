@@ -40,7 +40,7 @@ lvim.plugins = {
       require("solarized").setup({
         variant = "summer", -- Light variant
         transparent = {
-          enabled = false, -- Opaque background
+          enabled = false,  -- Opaque background
         },
         styles = {
           comments = { italic = true },
@@ -97,11 +97,6 @@ lvim.plugins = {
           enabled = true,
         },
         lsp = {
-          color = {
-            enabled = true,
-            background = false,
-            virtual_text = true,
-          },
           on_attach = function(client, bufnr)
             -- Flutter-specific keybindings are handled by WhichKey below
           end,
@@ -166,6 +161,4 @@ lvim.lsp.buffer_mappings.normal_mode = {
   ["<leader>rn"] = { vim.lsp.buf.rename, "Rename" },
   ["<leader>ca"] = { vim.lsp.buf.code_action, "Code action" },
   ["<leader>d"] = { vim.diagnostic.open_float, "Show diagnostics" },
-  ["[d"] = { vim.diagnostic.goto_prev, "Previous diagnostic" },
-  ["]d"] = { vim.diagnostic.goto_next, "Next diagnostic" },
 }

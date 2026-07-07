@@ -97,11 +97,6 @@ lvim.plugins = {
           enabled = true,
         },
         lsp = {
-          color = {
-            enabled = true,
-            background = false,
-            virtual_text = true,
-          },
           on_attach = function(client, bufnr)
             -- Flutter-specific keybindings are handled by WhichKey below
           end,
