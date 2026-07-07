@@ -152,4 +152,4 @@ Standard triage label vocabulary (`needs-triage`, `needs-info`, `ready-for-agent
 
 ### Domain docs
 
-Single-context layout with a global `CONTEXT.md` at root and ADRs in `docs/adr/`. See `docs/agents/domain.md`.
+Multi-context layout defined by [CONTEXT-MAP.md](file:///Users/diqit/Documents/GitHub/config/dotfiles/CONTEXT-MAP.md), pointing to per-directory contexts. See [domain.md](file:///Users/diqit/Documents/GitHub/config/dotfiles/docs/agents/domain.md).
