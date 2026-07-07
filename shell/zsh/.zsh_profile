@@ -240,3 +240,5 @@ ccbuild() {
   echo "📦 Building custom CC Switch production app..."
   (cd "$HOME/Documents/GitHub/config/dotfiles/tools/cc-switch" && pnpm install && pnpm tauri build)
 }
+
+alias termsync="pnpm --prefix \$HOME/Documents/GitHub/config/dotfiles sync:terminal"
