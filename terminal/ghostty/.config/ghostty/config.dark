@@ -1,0 +1,25 @@
+# Ghostty Dark Mode Config - Optimized for nearsighted users in low light
+# Font configuration
+font-family = "JetBrains Mono"
+font-size = 16
+
+# Theme - Comfortable dark mode
+theme = "Solarized Dark Patched"
+
+# Layout optimization
+window-padding-x = 8
+window-padding-y = 8
+
+# Opaque background for dark mode
+background-opacity = 1.0
+
+# Cursor - Easy to track
+cursor-style = block
+cursor-style-blink = true
+
+# macOS settings (preserved from original config)
+macos-non-native-fullscreen = true
+macos-titlebar-style = transparent
+window-save-state = never
+macos-auto-secure-input = true
+macos-secure-input-indication = true

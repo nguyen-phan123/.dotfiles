@@ -1,9 +1,1 @@
-macos-non-native-fullscreen = true
-macos-titlebar-style = transparent
-window-save-state = never
-macos-auto-secure-input = true
-macos-secure-input-indication = true
-font-family = "JetBrains Mono"
-Font-weight = 600
-font-size = 14
-theme = "Solarized Dark Patched"
+config.light
