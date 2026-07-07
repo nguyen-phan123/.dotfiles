@@ -139,3 +139,17 @@ rtk init --global       # Append RTK directives globally to ~/.claude/CLAUDE.md
 | **GitHub** | `gh pr`, `gh run`, `gh issue` | **26-87%** |
 
 <!-- /rtk-instructions -->
+
+## Agent skills
+
+### Issue tracker
+
+Offline issue tracker using local markdown files under `docs/issues/`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Standard triage label vocabulary (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout with a global `CONTEXT.md` at root and ADRs in `docs/adr/`. See `docs/agents/domain.md`.
