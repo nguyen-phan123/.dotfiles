@@ -39,7 +39,9 @@ lvim.plugins = {
     config = function()
       require("solarized").setup({
         variant = "winter", -- Dark variant
-        transparent = false,
+        transparent = {
+          enabled = false, -- Opaque background
+        },
         styles = {
           comments = { italic = true },
           functions = { bold = true },
