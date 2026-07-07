@@ -5,4 +5,5 @@ macos-auto-secure-input = true
 macos-secure-input-indication = true
 font-family = "JetBrains Mono"
 Font-weight = 600
-theme = "GitHub Dark"
+font-size = 14
+theme = "Solarized Dark Patched"
