@@ -22,7 +22,8 @@
     "release": "changeset publish",
     "install": "./install.sh",
     "update": "git pull && ./install.sh",
-    "sync": "node shell/zsh/.sync-gemini.js"
+    "sync": "node shell/zsh/.sync-gemini.js",
+    "sync:terminal": "./install.sh --only ghostty cmux && echo '\\n✨ Cấu hình đã được sync! Nhấn Cmd+Shift+, trong cmux/Ghostty để reload.'"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1"
