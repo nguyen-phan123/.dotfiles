@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Theme switcher for Ghostty and cmux terminal configurations
+# Theme switcher for Ghostty, cmux, and LunarVim configurations
 # Optimized for nearsighted users working in varying lighting conditions
 
 set -e
@@ -7,6 +7,7 @@ set -e
 DOTFILES_ROOT="/Users/diqit/Documents/GitHub/config/dotfiles"
 GHOSTTY_DIR="$DOTFILES_ROOT/terminal/ghostty/.config/ghostty"
 CMUX_DIR="$DOTFILES_ROOT/terminal/cmux/.config/cmux"
+LVIM_DIR="$DOTFILES_ROOT/coding/lvim/.config/lvim"
 
 # Color codes for output
 GREEN='\033[0;32m'
@@ -28,15 +29,22 @@ switch_to_light() {
         return 1
     fi
 
+    if [[ ! -f "$LVIM_DIR/config.light.lua" ]]; then
+        echo -e "${RED}Error: $LVIM_DIR/config.light.lua not found${NC}"
+        return 1
+    fi
+
     # Update symlinks
     ln -sf config.light "$GHOSTTY_DIR/config"
     ln -sf cmux.light.json "$CMUX_DIR/cmux.json"
+    ln -sf config.light.lua "$LVIM_DIR/config.lua"
 
     echo -e "${GREEN}✓ Switched to light mode${NC}"
     echo "  - Ghostty: GitHub Light High Contrast"
     echo "  - Cmux: Light appearance"
+    echo "  - LunarVim: Solarized Light"
     echo ""
-    echo "Restart Ghostty/cmux to apply changes."
+    echo "Restart Ghostty/cmux/LunarVim to apply changes."
 }
 
 switch_to_dark() {
@@ -53,15 +61,22 @@ switch_to_dark() {
         return 1
     fi
 
+    if [[ ! -f "$LVIM_DIR/config.dark.lua" ]]; then
+        echo -e "${RED}Error: $LVIM_DIR/config.dark.lua not found${NC}"
+        return 1
+    fi
+
     # Update symlinks
     ln -sf config.dark "$GHOSTTY_DIR/config"
     ln -sf cmux.dark.json "$CMUX_DIR/cmux.json"
+    ln -sf config.dark.lua "$LVIM_DIR/config.lua"
 
     echo -e "${GREEN}✓ Switched to dark mode${NC}"
     echo "  - Ghostty: Solarized Dark Patched"
     echo "  - Cmux: Dark appearance"
+    echo "  - LunarVim: Solarized Dark"
     echo ""
-    echo "Restart Ghostty/cmux to apply changes."
+    echo "Restart Ghostty/cmux/LunarVim to apply changes."
 }
 
 show_status() {
@@ -81,11 +96,18 @@ show_status() {
     else
         echo -e "  Cmux: ${RED}Not a symlink${NC}"
     fi
+
+    if [[ -L "$LVIM_DIR/config.lua" ]]; then
+        local lvim_target=$(readlink "$LVIM_DIR/config.lua")
+        echo "  LunarVim: $lvim_target"
+    else
+        echo -e "  LunarVim: ${RED}Not a symlink${NC}"
+    fi
 }
 
 show_help() {
     cat <<EOF
-Theme Switcher for Terminal Configurations
+Theme Switcher for Terminal & Editor Configurations
 Optimized for nearsighted users in varying lighting conditions
 
 Usage:
@@ -94,14 +116,21 @@ Usage:
     theme-switch.sh status   Show current theme configuration
     theme-switch.sh help     Show this help message
 
+Components:
+  - Ghostty terminal emulator
+  - Cmux terminal multiplexer
+  - LunarVim text editor
+
 Light Mode Features:
-  - GitHub Light High Contrast theme (maximum contrast)
+  - Ghostty: GitHub Light High Contrast theme
+  - LunarVim: Solarized Light theme
   - Font size 16px
   - Background opacity 0.95 (reduces glare on glossy screens)
   - Block cursor with blink
 
 Dark Mode Features:
-  - Solarized Dark Patched theme
+  - Ghostty: Solarized Dark Patched theme
+  - LunarVim: Solarized Dark theme
   - Font size 16px
   - Opaque background (opacity 1.0)
   - Block cursor with blink

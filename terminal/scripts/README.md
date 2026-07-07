@@ -1,13 +1,14 @@
-# Terminal Theme Switching System
+# Terminal & Editor Theme Switching System
 
-Dual-mode terminal configuration optimized for nearsighted users working in varying lighting conditions.
+Unified theme switching for terminal and editor, optimized for nearsighted users working in varying lighting conditions.
 
 ## 🎯 Purpose
 
-This system provides easy switching between light and dark terminal themes, specifically optimized for:
+This system provides easy switching between light and dark themes across terminal and editor, specifically optimized for:
 - **Nearsighted users** who read code for extended periods
 - **Office environments** with bright electric lighting (light mode)
 - **Home/night work** in low light conditions (dark mode)
+- **Consistent UI** between terminal (Ghostty/cmux) and editor (LunarVim)
 
 ## 🏗️ Architecture
 
@@ -25,6 +26,11 @@ terminal/
     ├── cmux.light.json      # Light appearance
     ├── cmux.dark.json       # Dark appearance
     └── cmux.json -> cmux.light.json  # Symlink (current theme)
+
+coding/lvim/.config/lvim/
+├── config.light.lua         # LunarVim light mode (Solarized Light)
+├── config.dark.lua          # LunarVim dark mode (Solarized Dark)
+└── config.lua -> config.light.lua  # Symlink (current theme)
 ```
 
 ### Optimization Features
@@ -35,15 +41,15 @@ Both modes include:
 - **Block cursor with blink** (easier to locate)
 - **Window padding 8px** (comfortable margins)
 
-**Light Mode** (`GitHub Light High Contrast`):
+**Light Mode** (`GitHub Light High Contrast` for terminal, `Solarized Light` for editor):
 - Maximum contrast for bright office environments
 - Background opacity 0.95 (reduces glare on glossy MacBook screens)
-- Synced with cmux light appearance
+- Synced appearance across terminal and editor
 
-**Dark Mode** (`Solarized Dark Patched`):
+**Dark Mode** (`Solarized Dark Patched` for terminal and editor):
 - Comfortable for night/low light work
 - Opaque background (opacity 1.0)
-- Synced with cmux dark appearance
+- Consistent Solarized theme across all tools
 
 ## 🚀 Usage
 
@@ -87,15 +93,16 @@ theme-status  # Check current theme
 
 ## 🔄 How It Works
 
-The script updates symlinks for both Ghostty and cmux configs simultaneously:
+The script updates symlinks for Ghostty, cmux, and LunarVim configs simultaneously:
 
 1. **Validates** that target config files exist
 2. **Updates symlinks**:
    - `ghostty/config` → `config.light` or `config.dark`
    - `cmux/cmux.json` → `cmux.light.json` or `cmux.dark.json`
+   - `lvim/config.lua` → `config.light.lua` or `config.dark.lua`
 3. **Provides feedback** on what was changed
 
-**Important**: You need to **restart Ghostty/cmux** after switching for changes to take effect.
+**Important**: You need to **restart Ghostty/cmux/LunarVim** after switching for changes to take effect.
 
 ## 📋 Multi-Machine Setup
 
