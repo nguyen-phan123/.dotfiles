@@ -116,35 +116,47 @@ function syncMcp() {
 
 function syncSkills() {
   const homeDir = os.homedir();
-  const sourceSkillsDir = path.join(homeDir, '.gemini', 'skills');
-
-  if (!fs.existsSync(sourceSkillsDir)) {
-    return { skipped: true, reason: 'Central skills directory not found' };
-  }
-
   const activeSkills = [];
-  try {
-    const items = fs.readdirSync(sourceSkillsDir);
-    for (const item of items) {
-      const itemPath = path.join(sourceSkillsDir, item);
-      try {
-        const stat = fs.lstatSync(itemPath);
-        let targetPath = null;
-        if (stat.isSymbolicLink()) {
-          targetPath = fs.readlinkSync(itemPath);
-        } else {
-          targetPath = itemPath;
+
+  const scanDir = (dir) => {
+    if (!fs.existsSync(dir)) return;
+    try {
+      const items = fs.readdirSync(dir);
+      for (const item of items) {
+        if (item === 'skills-lock.json' || item === '.DS_Store') continue;
+        const itemPath = path.join(dir, item);
+        try {
+          const stat = fs.lstatSync(itemPath);
+          let targetPath = null;
+          if (stat.isSymbolicLink()) {
+            targetPath = fs.readlinkSync(itemPath);
+          } else {
+            targetPath = itemPath;
+          }
+          
+          if (!activeSkills.some(s => s.name === item)) {
+            activeSkills.push({
+              name: item,
+              targetPath: targetPath
+            });
+          }
+        } catch (e) {
+          // ignore
         }
-        activeSkills.push({
-          name: item,
-          targetPath: targetPath
-        });
-      } catch (e) {
-        // ignore
       }
+    } catch (err) {
+      console.warn(`⚠️ Failed to read skills from ${dir}: ${err.message}`);
     }
-  } catch (err) {
-    return { skipped: true, reason: `Failed to read central skills: ${err.message}` };
+  };
+
+  const centralGeminiSkillsDir = path.join(homeDir, '.gemini', 'skills');
+  const centralAgentsSkillsDir = path.join(homeDir, '.agents', 'skills');
+
+  scanDir(centralGeminiSkillsDir);
+  scanDir(centralAgentsSkillsDir);
+
+  if (activeSkills.length === 0) {
+    return { skipped: true, reason: 'No skills found in central directories' };
   }
 
   const targets = [
