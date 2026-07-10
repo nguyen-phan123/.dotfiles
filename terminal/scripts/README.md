@@ -19,13 +19,9 @@ terminal/
 │   ├── theme-switch.sh      # Theme switching script
 │   └── README.md            # This file
 ├── ghostty/.config/ghostty/
-│   ├── config.light         # Light mode config
-│   ├── config.dark          # Dark mode config
-│   └── config -> config.light  # Symlink (current theme)
+│   └── config               # Unified, natively adaptive config
 └── cmux/.config/cmux/
-    ├── cmux.light.json      # Light appearance
-    ├── cmux.dark.json       # Dark appearance
-    └── cmux.json -> cmux.light.json  # Symlink (current theme)
+    └── cmux.json            # Unified, natively adaptive config
 
 coding/lvim/.config/lvim/
 ├── config.light.lua         # LunarVim light mode (Solarized Light)
@@ -41,15 +37,15 @@ Both modes include:
 - **Block cursor with blink** (easier to locate)
 - **Window padding 8px** (comfortable margins)
 
-**Light Mode** (`GitHub Light High Contrast` for terminal, `Solarized Light` for editor):
+**Light Mode** (Natively adaptive `GitHub Light High Contrast` for terminal, `Solarized Light` for editor):
 - Maximum contrast for bright office environments
 - Background opacity 0.95 (reduces glare on glossy MacBook screens)
 - Synced appearance across terminal and editor
 
-**Dark Mode** (`Solarized Dark Patched` for terminal and editor):
+**Dark Mode** (Natively adaptive `Solarized Dark Patched` for terminal, `Solarized Dark` for editor):
 - Comfortable for night/low light work
-- Opaque background (opacity 1.0)
-- Consistent Solarized theme across all tools
+- Background opacity 0.95 (maintained for visual consistency)
+- Consistent theme across all tools
 
 ## 🚀 Usage
 
@@ -93,30 +89,22 @@ theme-status  # Check current theme
 
 ## 🔄 How It Works
 
-The script updates symlinks for Ghostty, cmux, and LunarVim configs simultaneously:
+The system is split into **Natively Adaptive** components (Terminal) and **Symlink Swapped** components (LunarVim):
 
-1. **Validates** that target config files exist
-2. **Updates symlinks**:
-   - `ghostty/config` → `config.light` or `config.dark`
-   - `cmux/cmux.json` → `cmux.light.json` or `cmux.dark.json`
-   - `lvim/config.lua` → `config.light.lua` or `config.dark.lua`
-3. **Provides feedback** on what was changed
-
-**Important**: You need to **restart Ghostty/cmux/LunarVim** after switching for changes to take effect.
+1. **Natively Adaptive (Ghostty & Cmux)**:
+   - **Ghostty** uses native `theme = light:GitHub Light High Contrast,dark:Solarized Dark Patched` syntax, automatically toggling colors as macOS changes system appearance.
+   - **Cmux** uses native `"appearance": "system"` syntax, instantly adjusting panel boundaries to follow the OS.
+2. **Symlink Swapped (LunarVim)**:
+   - The `theme-switch.sh` script swaps LunarVim's config between `config.light.lua` and `config.dark.lua` using symlinks.
+   - `theme-switch.sh` still outputs status and accepts `light`/`dark` targets, but only performs filesystem writes for LunarVim.
 
 ## 📋 Multi-Machine Setup
 
-### Default Configuration
-- All machines default to **light mode** after syncing dotfiles
-- Symlinks point to `config.light` and `cmux.light.json`
+### Natively Adaptive Configs
+- Ghostty and cmux settings are identical across machines. They automatically look at the individual machine's system preference. No manual setup is needed.
 
-### Per-Machine Customization
-On your home machine (used primarily at night), run once:
-```bash
-theme-dark
-```
-
-The symlink will persist across shell sessions and dotfiles syncs. You can always manually switch as needed.
+### LunarVim Customization
+On any machine, you can run `theme-dark` to lock LunarVim to dark theme or `theme-light` to lock it to light theme.
 
 ## 🔧 Troubleshooting
 
@@ -147,13 +135,13 @@ This shows which config files are currently linked.
 
 To modify theme settings:
 
-1. **Edit the appropriate config file**:
-   - Light mode: `terminal/ghostty/.config/ghostty/config.light`
-   - Dark mode: `terminal/ghostty/.config/ghostty/config.dark`
+1. **Edit the unified config file**:
+   - Edit the main configuration file at [terminal/ghostty/.config/ghostty/config](file:///Users/diqit/Documents/GitHub/config/dotfiles/terminal/ghostty/.config/ghostty/config).
+   - Change the `theme = light:<light_theme>,dark:<dark_theme>` line to use any alternative Ghostty themes.
 
-2. **Restart Ghostty** to see changes
+2. **Save changes** (Ghostty will auto-reload the settings in real-time)
 
-3. **Commit changes** to dotfiles repo to sync across machines
+3. **Commit changes** to the dotfiles repo to sync across machines
 
 ### Available Ghostty Themes
 
@@ -189,7 +177,7 @@ Change the `theme = "..."` line in the respective config file.
 - Consider f.lux or macOS Night Shift for additional blue light reduction
 
 **Font size adjustment**:
-If 16px is too small or large, edit both `config.light` and `config.dark`:
+If 16px is too small or large, edit the unified `config`:
 ```
 font-size = 18  # Increase to 18px
 ```

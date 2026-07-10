@@ -18,48 +18,24 @@ NC='\033[0m' # No Color
 switch_to_light() {
     echo -e "${YELLOW}Switching to light mode...${NC}"
 
-    # Validate config files exist
-    if [[ ! -f "$GHOSTTY_DIR/config.light" ]]; then
-        echo -e "${RED}Error: $GHOSTTY_DIR/config.light not found${NC}"
-        return 1
-    fi
-
-    if [[ ! -f "$CMUX_DIR/cmux.light.json" ]]; then
-        echo -e "${RED}Error: $CMUX_DIR/cmux.light.json not found${NC}"
-        return 1
-    fi
-
     if [[ ! -f "$LVIM_DIR/config.light.lua" ]]; then
         echo -e "${RED}Error: $LVIM_DIR/config.light.lua not found${NC}"
         return 1
     fi
 
     # Update symlinks
-    ln -sf config.light "$GHOSTTY_DIR/config"
-    ln -sf cmux.light.json "$CMUX_DIR/cmux.json"
     ln -sf config.light.lua "$LVIM_DIR/config.lua"
 
     echo -e "${GREEN}✓ Switched to light mode${NC}"
-    echo "  - Ghostty: GitHub Light High Contrast"
-    echo "  - Cmux: Light appearance"
+    echo "  - Ghostty: Natively adaptive (GitHub Light High Contrast)"
+    echo "  - Cmux: Natively adaptive (Light appearance)"
     echo "  - LunarVim: Solarized Light"
     echo ""
-    echo "Restart Ghostty/cmux/LunarVim to apply changes."
+    echo "Restart/Reload LunarVim to apply changes."
 }
 
 switch_to_dark() {
     echo -e "${YELLOW}Switching to dark mode...${NC}"
-
-    # Validate config files exist
-    if [[ ! -f "$GHOSTTY_DIR/config.dark" ]]; then
-        echo -e "${RED}Error: $GHOSTTY_DIR/config.dark not found${NC}"
-        return 1
-    fi
-
-    if [[ ! -f "$CMUX_DIR/cmux.dark.json" ]]; then
-        echo -e "${RED}Error: $CMUX_DIR/cmux.dark.json not found${NC}"
-        return 1
-    fi
 
     if [[ ! -f "$LVIM_DIR/config.dark.lua" ]]; then
         echo -e "${RED}Error: $LVIM_DIR/config.dark.lua not found${NC}"
@@ -67,34 +43,44 @@ switch_to_dark() {
     fi
 
     # Update symlinks
-    ln -sf config.dark "$GHOSTTY_DIR/config"
-    ln -sf cmux.dark.json "$CMUX_DIR/cmux.json"
     ln -sf config.dark.lua "$LVIM_DIR/config.lua"
 
     echo -e "${GREEN}✓ Switched to dark mode${NC}"
-    echo "  - Ghostty: Solarized Dark Patched"
-    echo "  - Cmux: Dark appearance"
+    echo "  - Ghostty: Natively adaptive (Solarized Dark Patched)"
+    echo "  - Cmux: Natively adaptive (Dark appearance)"
     echo "  - LunarVim: Solarized Dark"
     echo ""
-    echo "Restart Ghostty/cmux/LunarVim to apply changes."
+    echo "Restart/Reload LunarVim to apply changes."
 }
 
 show_status() {
     echo "Current theme configuration:"
     echo ""
 
-    if [[ -L "$GHOSTTY_DIR/config" ]]; then
+    if [[ -f "$GHOSTTY_DIR/config" && ! -L "$GHOSTTY_DIR/config" ]]; then
+        if grep -q "theme = light:" "$GHOSTTY_DIR/config"; then
+            echo -e "  Ghostty: ${GREEN}Natively Adaptive${NC}"
+        else
+            echo "  Ghostty: Static file configuration"
+        fi
+    elif [[ -L "$GHOSTTY_DIR/config" ]]; then
         local ghostty_target=$(readlink "$GHOSTTY_DIR/config")
-        echo "  Ghostty: $ghostty_target"
+        echo "  Ghostty: Symlinked to $ghostty_target (Deprecated)"
     else
-        echo -e "  Ghostty: ${RED}Not a symlink${NC}"
+        echo -e "  Ghostty: ${RED}Missing config file${NC}"
     fi
 
-    if [[ -L "$CMUX_DIR/cmux.json" ]]; then
+    if [[ -f "$CMUX_DIR/cmux.json" && ! -L "$CMUX_DIR/cmux.json" ]]; then
+        if grep -q '"appearance"[[:space:]]*:[[:space:]]*"system"' "$CMUX_DIR/cmux.json" || grep -q '"appearance" : "system"' "$CMUX_DIR/cmux.json" || grep -q '"appearance": "system"' "$CMUX_DIR/cmux.json"; then
+            echo -e "  Cmux: ${GREEN}Natively Adaptive${NC}"
+        else
+            echo "  Cmux: Static file configuration"
+        fi
+    elif [[ -L "$CMUX_DIR/cmux.json" ]]; then
         local cmux_target=$(readlink "$CMUX_DIR/cmux.json")
-        echo "  Cmux: $cmux_target"
+        echo "  Cmux: Symlinked to $cmux_target (Deprecated)"
     else
-        echo -e "  Cmux: ${RED}Not a symlink${NC}"
+        echo -e "  Cmux: ${RED}Missing config file${NC}"
     fi
 
     if [[ -L "$LVIM_DIR/config.lua" ]]; then
@@ -111,28 +97,30 @@ Theme Switcher for Terminal & Editor Configurations
 Optimized for nearsighted users in varying lighting conditions
 
 Usage:
-    theme-switch.sh light    Switch to light mode (office/bright lighting)
-    theme-switch.sh dark     Switch to dark mode (night/low lighting)
+    theme-switch.sh light    Switch to light mode (LunarVim)
+    theme-switch.sh dark     Switch to dark mode (LunarVim)
     theme-switch.sh status   Show current theme configuration
     theme-switch.sh help     Show this help message
 
+Note: Ghostty and Cmux are natively adaptive and follow the macOS system theme automatically.
+
 Components:
-  - Ghostty terminal emulator
-  - Cmux terminal multiplexer
-  - LunarVim text editor
+  - Ghostty terminal emulator (Natively Adaptive)
+  - Cmux terminal multiplexer (Natively Adaptive)
+  - LunarVim text editor (Switches via script)
 
 Light Mode Features:
-  - Ghostty: GitHub Light High Contrast theme
+  - Ghostty: GitHub Light High Contrast theme (Adaptive)
   - LunarVim: Solarized Light theme
   - Font size 16px
   - Background opacity 0.95 (reduces glare on glossy screens)
   - Block cursor with blink
 
 Dark Mode Features:
-  - Ghostty: Solarized Dark Patched theme
+  - Ghostty: Solarized Dark Patched theme (Adaptive)
   - LunarVim: Solarized Dark theme
   - Font size 16px
-  - Opaque background (opacity 1.0)
+  - Background opacity 0.95
   - Block cursor with blink
 
 Shell Aliases (add to ~/.zshrc):

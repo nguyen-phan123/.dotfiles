@@ -1,1 +1,27 @@
-config.light
+# Ghostty Adaptive Config - Optimized for nearsighted users
+# Automatically adapts to macOS light/dark mode changes
+
+# Font configuration
+font-family = "JetBrains Mono"
+font-size = 16
+
+# Theme mapping for light and dark modes
+theme = light:GitHub Light High Contrast,dark:Solarized Dark Patched
+
+# Layout optimization
+window-padding-x = 8
+window-padding-y = 8
+
+# Balanced background opacity to reduce glare while maintaining contrast
+background-opacity = 0.95
+
+# Cursor configuration
+cursor-style = block
+cursor-style-blink = true
+
+# macOS settings
+macos-non-native-fullscreen = true
+macos-titlebar-style = transparent
+window-save-state = never
+macos-auto-secure-input = true
+macos-secure-input-indication = true

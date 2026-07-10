@@ -1,1 +1,8 @@
-cmux.light.json
+{
+  "$schema" : "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "app" : {
+    "appearance" : "system",
+    "newWorkspacePlacement" : "afterCurrent"
+  },
+  "schemaVersion" : 1
+}

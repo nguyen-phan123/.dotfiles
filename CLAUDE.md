@@ -144,7 +144,7 @@ rtk init --global       # Append RTK directives globally to ~/.claude/CLAUDE.md
 
 ### Issue tracker
 
-Offline issue tracker using local markdown files under `docs/issues/`. See `docs/agents/issue-tracker.md`.
+GitHub Issues using the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
