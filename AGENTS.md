@@ -54,5 +54,5 @@ Ensure maximum compatibility and clean code when writing configuration files and
 *   `/grill-me`: Engage in an interactive query loop to stress-test your design decisions before writing code.
 
 ### Domain Documentation & Contexts
-*   **Issue Tracker**: Log tickets and progress inside local markdown files. See [issue-tracker.md](file:///Users/diqit/Documents/GitHub/config/dotfiles/docs/agents/issue-tracker.md).
+*   **Issue Tracker**: Log tickets and progress inside GitHub Issues using the `gh` CLI. See [issue-tracker.md](file:///Users/diqit/Documents/GitHub/config/dotfiles/docs/agents/issue-tracker.md).
 *   **Domain docs**: Check [domain.md](file:///Users/diqit/Documents/GitHub/config/dotfiles/docs/agents/domain.md) and [CONTEXT.md](file:///Users/diqit/Documents/GitHub/config/dotfiles/CONTEXT.md) for terminology mappings and architectural constraints.
