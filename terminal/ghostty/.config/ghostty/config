@@ -5,8 +5,8 @@
 font-family = "JetBrains Mono"
 font-size = 16
 
-# Theme mapping for light and dark modes
-theme = light:GitHub Light High Contrast,dark:Solarized Dark Patched
+# Theme configuration
+theme = TokyoNight
 
 # Layout optimization
 window-padding-x = 8
