@@ -31,8 +31,8 @@ Personal dotfiles repository designed to configure shell utilities, development 
 *   **Target terms**: Use **Starship Theme Switcher**.
 *   **Avoid**: *Prompt editor*, *p10k wrapper*.
 
-### 🔄 Antigravity Sync Script (`sync-antigravity`)
-*   **Definition**: A Node.js module and package script (`shell/zsh/.sync-antigravity.js` / `pnpm sync-antigravity`) that synchronizes MCP server configurations and agent skills across Antigravity IDE, Antigravity CLI, and Gemini environments.
+### 🔄 Antigravity Sync Script (`sync:antigravity`)
+*   **Definition**: A Node.js module and package script (`shell/zsh/.sync-antigravity.js` / `pnpm sync:antigravity`) that synchronizes MCP server configurations and agent skills across Antigravity IDE, Antigravity CLI, and Gemini environments.
 *   **Target terms**: Use **Antigravity Sync Script**.
 *   **Avoid**: *Gemini sync script*, *MCP copy script*.
 
