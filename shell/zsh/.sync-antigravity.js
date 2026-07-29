@@ -273,63 +273,72 @@ function syncSkills() {
   return { skipped: false, results };
 }
 
-const mcp = syncMcp();
-const skills = syncSkills();
+function main() {
+  const mcp = syncMcp();
+  const skills = syncSkills();
 
-console.log('\n🔄 Syncing MCP & Skills Configuration:');
+  console.log('\n🔄 Syncing MCP & Skills Configuration:');
 
-const environments = [
-  'Antigravity IDE',
-  'Antigravity',
-  'Antigravity CLI / Gemini Config'
-];
+  const environments = [
+    'Antigravity IDE',
+    'Antigravity',
+    'Antigravity CLI / Gemini Config'
+  ];
 
-const labelWidth = 31;
-const mcpWidth = 22;
-const skillsWidth = 15;
+  const labelWidth = 31;
+  const mcpWidth = 22;
+  const skillsWidth = 15;
 
-const horizontalLine = `┌${'─'.repeat(labelWidth + 2)}┬${'─'.repeat(mcpWidth + 2)}┬${'─'.repeat(skillsWidth + 2)}┐`;
-const dividerLine = `├${'─'.repeat(labelWidth + 2)}┼${'─'.repeat(mcpWidth + 2)}┼${'─'.repeat(skillsWidth + 2)}┤`;
-const bottomLine = `└${'─'.repeat(labelWidth + 2)}┴${'─'.repeat(mcpWidth + 2)}┴${'─'.repeat(skillsWidth + 2)}┘`;
+  const horizontalLine = `┌${'─'.repeat(labelWidth + 2)}┬${'─'.repeat(mcpWidth + 2)}┬${'─'.repeat(skillsWidth + 2)}┐`;
+  const dividerLine = `├${'─'.repeat(labelWidth + 2)}┼${'─'.repeat(mcpWidth + 2)}┼${'─'.repeat(skillsWidth + 2)}┤`;
+  const bottomLine = `└${'─'.repeat(labelWidth + 2)}┴${'─'.repeat(mcpWidth + 2)}┴${'─'.repeat(skillsWidth + 2)}┘`;
 
-function pad(str, width) {
-  return str + ' '.repeat(Math.max(0, width - str.length));
-}
-
-console.log(horizontalLine);
-console.log(`│ ${pad('Environment', labelWidth)} │ ${pad('MCP Sync', mcpWidth)} │ ${pad('Skills Sync', skillsWidth)} │`);
-console.log(dividerLine);
-
-for (const env of environments) {
-  let mcpText = '';
-  if (mcp.skipped) {
-    mcpText = 'Skipped';
-  } else {
-    const res = mcp.results[env];
-    if (!res) {
-      mcpText = 'N/A';
-    } else if (!res.success) {
-      mcpText = `Error: ${res.error.substring(0, 15)}`;
-    } else {
-      mcpText = `+${res.added} / ~${res.updated}`;
-    }
+  function pad(str, width) {
+    return str + ' '.repeat(Math.max(0, width - str.length));
   }
 
-  let skillsText = '';
-  if (skills.skipped) {
-    skillsText = 'Skipped';
-  } else {
-    const res = skills.results[env];
-    if (!res) {
-      skillsText = 'N/A';
-    } else if (!res.success) {
-      skillsText = `Error: ${res.error.substring(0, 8)}`;
+  console.log(horizontalLine);
+  console.log(`│ ${pad('Environment', labelWidth)} │ ${pad('MCP Sync', mcpWidth)} │ ${pad('Skills Sync', skillsWidth)} │`);
+  console.log(dividerLine);
+
+  for (const env of environments) {
+    let mcpText = '';
+    if (mcp.skipped) {
+      mcpText = 'Skipped';
     } else {
-      skillsText = `${res.synced} skills`;
+      const res = mcp.results[env];
+      if (!res) {
+        mcpText = 'N/A';
+      } else if (!res.success) {
+        mcpText = `Error: ${res.error.substring(0, 15)}`;
+      } else {
+        mcpText = `+${res.added} / ~${res.updated}`;
+      }
     }
+
+    let skillsText = '';
+    if (skills.skipped) {
+      skillsText = 'Skipped';
+    } else {
+      const res = skills.results[env];
+      if (!res) {
+        skillsText = 'N/A';
+      } else if (!res.success) {
+        skillsText = `Error: ${res.error.substring(0, 8)}`;
+      } else {
+        skillsText = `${res.synced} skills`;
+      }
+    }
+
+    console.log(`│ ${pad(env, labelWidth)} │ ${pad(mcpText, mcpWidth)} │ ${pad(skillsText, skillsWidth)} │`);
   }
 
-  console.log(`│ ${pad(env, labelWidth)} │ ${pad(mcpText, mcpWidth)} │ ${pad(skillsText, skillsWidth)} │`);
+  console.log(bottomLine);
 }
 
-console.log(bottomLine);
+module.exports = { syncMcp, syncSkills };
+
+if (require.main === module) {
+  main();
+}
+
