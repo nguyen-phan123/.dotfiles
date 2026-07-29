@@ -12,6 +12,7 @@ Standard scripts and task runner commands:
 | :--- | :--- | :--- |
 | `pnpm install` | Install deps | Installs development tools and changesets dependencies. |
 | `pnpm test` | Run tests | Runs unit tests for configuration scripts and helper functions. |
+| `pnpm sync-antigravity` | Sync MCP & Skills | Synchronizes MCP servers and agent skills across Antigravity environments. |
 | `pnpm lint` | Code linting | Checks formatting of scripts, JSON, and yaml configurations. |
 | `./install.sh` | Symlink stow | Installs all packages using GNU Stow dynamically to `$HOME`. |
 
