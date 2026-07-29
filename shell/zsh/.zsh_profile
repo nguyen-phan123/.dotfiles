@@ -213,9 +213,9 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Gemini & Antigravity Config, Skills, and Plugins Sync
-geminisync() {
-  echo "🔄 Running Gemini & Antigravity Sync..."
-  node "$HOME/.sync-gemini.js"
+antigravitysync() {
+  echo "🔄 Running Antigravity Sync..."
+  node "$HOME/.sync-antigravity.js"
   
   echo "🔄 Restarting Claude Desktop..."
   if killall "Claude" 2>/dev/null; then
@@ -226,7 +226,8 @@ geminisync() {
     echo "⚠️ Claude Desktop was not running."
   fi
 }
-alias mcpsync="geminisync"
+alias geminisync="antigravitysync"
+alias mcpsync="antigravitysync"
 
 # CC Switch custom app commands
 ccdev() {
