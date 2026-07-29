@@ -26,6 +26,12 @@ Personal dotfiles repository designed to configure shell utilities, development 
 *   **Target terms**: Use **Precedence Order**.
 *   **Avoid**: *Configuration leakage*, *global overshadowing*.
 
+### 🎨 Starship Theme Switcher (`theme-prompt`)
+*   **Definition**: A CLI tool and shell alias (`theme-prompt` / `starship-theme`) that allows interactive or scriptable switching of Starship prompt themes, combining official Starship presets with custom dotfiles presets stored in `shell/zsh/.config/starship/presets/`.
+*   **Target terms**: Use **Starship Theme Switcher**.
+*   **Avoid**: *Prompt editor*, *p10k wrapper*.
+
+
 ---
 
 ## 💬 Example Dialogue

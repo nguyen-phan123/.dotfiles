@@ -81,8 +81,6 @@ alias zz="source ~/.zshrc"
 alias dcs='docker container stop $(docker container ps -aq)'
 alias dcd='docker container rm $(docker container ps -aq)'
 
-# Python (use Homebrew version)
-alias python=/opt/homebrew/bin/python3
 
 # Package manager shortcuts
 alias pn="pnpm"
@@ -157,10 +155,10 @@ fpath=(~/.zsh_autocomplete $fpath)
 export PNPM_HOME="$HOME/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
-# Python virtual environment (lazy activation)
-source $HOME/.pyenv_setup.sh
+# Python (uv-managed, overrides Homebrew)
+export PATH="$HOME/.local/bin:$PATH"
 
-# Flutter configuration (FVM)
+# SDKMAN Configuration
 export PATH="$HOME/fvm/bin:$PATH"
 export PATH="$HOME/fvm/default/bin:$PATH"
 export PATH="$HOME/fvm/default/bin/cache/dart-sdk/bin:$PATH"
@@ -191,7 +189,7 @@ alias jdk-current="java -version && echo && echo JAVA_HOME: \$JAVA_HOME"
 
 # Antigravity Path
 export PATH="/Users/diqit/.antigravity/antigravity/bin:$PATH"
-# Local Bin
+# Local Bin (trailing, lowest priority)
 export PATH="$PATH:/Users/diqit/.local/bin"
 
 # Dart Completions
@@ -242,3 +240,10 @@ ccbuild() {
 }
 
 alias termsync="pnpm --prefix \$HOME/Documents/GitHub/config/dotfiles sync:terminal"
+
+# Theme management shortcuts
+alias theme-prompt="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/starship-theme.sh"
+alias starship-theme="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/starship-theme.sh"
+alias theme-light="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/theme-switch.sh light"
+alias theme-dark="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/theme-switch.sh dark"
+
