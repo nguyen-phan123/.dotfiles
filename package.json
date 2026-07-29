@@ -17,16 +17,10 @@
   "author": "Paul Hammond",
   "license": "MIT",
   "scripts": {
-    "changeset": "changeset",
-    "version": "changeset version",
-    "release": "changeset publish",
-    "install": "./install.sh",
-    "update": "git pull && ./install.sh",
     "test": "node --test shell/zsh/*.test.js",
-    "sync-antigravity": "node shell/zsh/.sync-antigravity.js",
+    "stow:install": "./install.sh",
+    "stow:update": "git pull && ./install.sh",
+    "sync:antigravity": "node shell/zsh/.sync-antigravity.js",
     "sync:terminal": "./install.sh --only ghostty cmux && echo '\\n✨ Cấu hình đã được sync! Nhấn Cmd+Shift+, trong cmux/Ghostty để reload.'"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.27.1"
   }
 }
