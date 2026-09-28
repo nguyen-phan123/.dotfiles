@@ -21,8 +21,14 @@ Multi-context layout active in this repository:
 ├── docs/adr/                          ← System-wide ADR decisions
 ├── shell/
 │   └── CONTEXT.md                     ← Shell Environment context
-└── terminal/
-    └── CONTEXT.md                     ← Terminal configurations context
+├── terminal/
+│   └── CONTEXT.md                     ← Terminal configurations context
+├── coding/
+│   └── CONTEXT.md                     ← Coding Environment context
+├── system/
+│   └── CONTEXT.md                     ← System Utilities context
+└── scripts/
+    └── CONTEXT.md                     ← Scripts & Automation context
 ```
 
 ## Use the glossary's vocabulary

@@ -4,7 +4,7 @@
 Accepted
 
 ## Context
-When configuring AI coding agents (Gemini IDE, Antigravity, and Claude Code) in a dotfiles repository, there is a risk of mixing system-wide agent parameters with workspace-local development tools. If system settings are stored globally, workspace-specific automations (like OpenSpec workflows and repository-specific coding skills) clutter the home directory or leak across unrelated projects.
+When configuring AI coding agents (Gemini IDE, Antigravity, and Claude Code) in a dotfiles repository, there is a risk of mixing system-wide agent parameters with workspace-local development tools. If system settings are stored globally, workspace-specific automations (like custom workflows and repository-specific coding skills) clutter the home directory or leak across unrelated projects.
 
 ## Decision
 We decided to strictly separate the configurations into two scopes:

@@ -36,6 +36,16 @@ Personal dotfiles repository designed to configure shell utilities, development 
 *   **Target terms**: Use **Antigravity Sync Script**.
 *   **Avoid**: *Gemini sync script*, *MCP copy script*.
 
+### ⚡ RTK Token Proxy (`rtk`)
+*   **Definition**: Rust Token Killer CLI proxy (`rtk`) that intercepts git/shell commands to optimize and compress token overhead by 60-90%.
+*   **Target terms**: Use **RTK Token Proxy** or **RTK**.
+*   **Avoid**: *Rust Type Kit*, *raw git proxy*.
+
+### 🧭 Ask Matt Skill Router (`/ask-matt`)
+*   **Definition**: An interactive skill router (`.agents/skills/ask-matt`) that guides developers and agents to select the precise skill or workflow fitting their situation.
+*   **Target terms**: Use **Ask Matt Router**.
+*   **Avoid**: *Skill finder*, *workflow directory*.
+
 
 ---
 
