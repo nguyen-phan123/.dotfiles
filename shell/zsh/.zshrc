@@ -1,3 +1,6 @@
+# Ensure valid TERM is set
+export TERM="${TERM:-xterm-256color}"
+
 # Path to oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -30,8 +33,8 @@ source $HOME/.zsh_profile
 
 export PATH="$HOME/.local/bin:$PATH"
 
-# Added by Antigravity CLI installer
-export PATH="/Users/diqit/.local/bin:$PATH"
-
 # Added by Antigravity IDE
-export PATH="/Users/diqit/.antigravity-ide/antigravity-ide/bin:$PATH"
+if [[ -d "$HOME/.antigravity-ide/antigravity-ide/bin" ]]; then
+  export PATH="$HOME/.antigravity-ide/antigravity-ide/bin:$PATH"
+fi
+

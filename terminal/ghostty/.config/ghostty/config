@@ -12,12 +12,12 @@ theme = TokyoNight
 window-padding-x = 8
 window-padding-y = 8
 
-# Balanced background opacity to reduce glare while maintaining contrast
-background-opacity = 0.95
+# Background opacity (1.0 = fully opaque / disable transparency)
+background-opacity = 1.0
 
 # Cursor configuration
 cursor-style = block
-cursor-style-blink = true
+cursor-style-blink = false
 
 # macOS settings
 macos-non-native-fullscreen = true

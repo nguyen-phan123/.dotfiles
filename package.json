@@ -21,6 +21,9 @@
     "stow:install": "./install.sh",
     "stow:update": "git pull && ./install.sh",
     "sync:antigravity": "node shell/zsh/.sync-antigravity.js",
-    "sync:terminal": "./install.sh --only ghostty cmux && echo '\\n✨ Cấu hình đã được sync! Nhấn Cmd+Shift+, trong cmux/Ghostty để reload.'"
+    "sync:terminal": "./install.sh --only ghostty cmux && echo '\\n✨ Cấu hình đã được sync! Nhấn Cmd+Shift+, trong cmux/Ghostty để reload.'",
+    "edit:gemini": "./scripts/open-ai-settings.sh gemini",
+    "edit:claude": "./scripts/open-ai-settings.sh claude",
+    "edit:ai": "./scripts/open-ai-settings.sh all"
   }
 }
