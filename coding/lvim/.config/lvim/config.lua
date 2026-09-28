@@ -1,1 +1,1 @@
-config.light.lua
+config.dark.lua
