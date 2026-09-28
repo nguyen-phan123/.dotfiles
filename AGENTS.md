@@ -49,10 +49,18 @@ Ensure maximum compatibility and clean code when writing configuration files and
 
 ## 🤖 5. Agent Workflows & Skills
 
-### Available Slash Commands
-*   `/goal`: Use when launching long-running automated optimization cycles.
+### Available Slash Commands & Workflows
+*   `/ask-matt`: Router to find which skill or workflow fits your current situation.
+*   `/grill-with-docs`: Stateful interview to sharpen plans/designs while updating `CONTEXT.md` & ADRs.
+*   `/grill-me`: Interactive query loop to stress-test design decisions without modifying local docs.
+*   `/domain-modeling`: Sharpen project domain language, glossary terms, and record ADRs.
+*   `/tdd`: Test-driven development loop (red-green-refactor).
+*   `/code-review`: Two-axis code review (Standards + Spec) against git diff or PRs.
+*   `/diagnosing-bugs`: Systematic bug diagnosis loop with tight feedback command.
+*   `/improve-codebase-architecture`: Surface deepening opportunities and refine module seams.
+*   `/request-refactor-plan`: Create detailed refactoring plans broken into small safe commits.
+*   `/goal`: Launch long-running automated optimization cycles.
 *   `/schedule`: Set timers or recurring background tasks.
-*   `/grill-me`: Engage in an interactive query loop to stress-test your design decisions before writing code.
 
 ### Domain Documentation & Contexts
 *   **Issue Tracker**: Log tickets and progress inside GitHub Issues using the `gh` CLI. See [issue-tracker.md](file:///Users/diqit/Documents/GitHub/config/dotfiles/docs/agents/issue-tracker.md).
