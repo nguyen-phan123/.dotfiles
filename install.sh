@@ -4,10 +4,10 @@ set -e
 # Setup paths
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BACKUP_DIR="$HOME/dotfiles_backup/$(date +%Y%m%d_%H%M%S)"
+MANIFEST_PY="$DOTFILES_DIR/scripts/lib/manifest.py"
 
-# Configuration
-GPG_AGENT_CONF=system/gnupg/.gnupg/gpg-agent.conf
-ALL_PACKAGES=(zsh tmux gnupg zellij .oh-my-zsh karabiner ghostty nvim lvim cmux pip)
+# Get list of available packages dynamically from packages.json
+ALL_PACKAGES=($(python3 "$MANIFEST_PY" list-packages))
 
 # Parse arguments
 ONLY_PACKAGES=()
@@ -57,7 +57,6 @@ EOF
   esac
 done
 
-
 # Determine which packages to install
 if [[ ${#ONLY_PACKAGES[@]} -gt 0 ]]; then
   # Validate packages
@@ -79,24 +78,12 @@ check_cmd() {
   command -v "$1" &>/dev/null
 }
 
-get_dependencies() {
-  case "$1" in
-    zsh|.oh-my-zsh) echo "starship zoxide bat eza fzf" ;;
-    nvim)           echo "ripgrep fd" ;;
-    lvim)           echo "lvim" ;;
-  esac
-}
-
-REQUIRED_DEPS=()
-# Always require stow for stowing packages
-REQUIRED_DEPS+=("stow")
-
-for pkg in "${PACKAGES[@]}"; do
-  for dep in $(get_dependencies "$pkg"); do
-    if [[ ! " ${REQUIRED_DEPS[*]} " =~ " ${dep} " ]]; then
-      REQUIRED_DEPS+=("$dep")
-    fi
-  done
+REQUIRED_DEPS=("stow")
+RAW_DEPS=$(python3 "$MANIFEST_PY" get-deps "${PACKAGES[@]}")
+for dep in $RAW_DEPS; do
+  if [[ ! " ${REQUIRED_DEPS[*]} " =~ " ${dep} " ]]; then
+    REQUIRED_DEPS+=("$dep")
+  fi
 done
 
 MISSING_DEPS=()
@@ -120,46 +107,23 @@ elif [[ ${#MISSING_DEPS[@]} -gt 0 ]]; then
   fi
 fi
 
-
-# 1. Setup specific configurations (only when relevant package is included)
-should_setup() {
-  local pkg="$1"
-  [[ ${#ONLY_PACKAGES[@]} -eq 0 ]] || [[ " ${ONLY_PACKAGES[*]} " =~ " ${pkg} " ]]
-}
-
-if should_setup "gnupg"; then
-  mkdir -p system/gnupg/.gnupg
-  if ! grep -q "pinentry-program" "$GPG_AGENT_CONF" 2>/dev/null; then
-      echo "# See: https://samuelsson.dev/sign-git-commits-on-github-with-gpg-in-macos/" >>$GPG_AGENT_CONF
-      echo "pinentry-program $(which pinentry-mac)" >>$GPG_AGENT_CONF
+# 1. Run package setup hooks if defined
+for pkg in "${PACKAGES[@]}"; do
+  hook_rel=$(python3 "$MANIFEST_PY" get-hook "$pkg")
+  if [[ -n "$hook_rel" && -f "$DOTFILES_DIR/$hook_rel" ]]; then
+    bash "$DOTFILES_DIR/$hook_rel"
   fi
-fi
-
-if should_setup "zellij"; then
-  mkdir -p ~/.zsh_autocomplete
-  if [ ! -f ~/.zsh_autocomplete/_zellij-completion ]; then
-      zellij setup --generate-completion zsh >>~/.zsh_autocomplete/_zellij-completion
-  fi
-fi
-
-# 2. Get category for a package (Bash 3.2 compatible)
-get_category() {
-  case "$1" in
-    zsh|.oh-my-zsh) echo "shell" ;;
-    tmux|zellij|ghostty|cmux) echo "terminal" ;;
-    nvim|lvim) echo "coding" ;;
-    gnupg|karabiner|pip) echo "system" ;;
-  esac
-}
+done
 
 BACKUP_COUNT=0
 REMOVE_COUNT=0
 
-# 3. Backup function
+# 2. Backup function
 backup_and_remove() {
     local rel_path="$1"
     local pkg="$2"
     local target="$HOME/$rel_path"
+    local pkg_cat=$(python3 "$MANIFEST_PY" get-category "$pkg")
     
     if [ -e "$target" ] && [ ! -L "$target" ]; then
         mkdir -p "$(dirname "$BACKUP_DIR/$rel_path")"
@@ -177,7 +141,7 @@ backup_and_remove() {
             fi
         else
             # If resolved path does NOT match the expected new package path, it is outdated
-            local expected_path="$DOTFILES_DIR/$(get_category "$pkg")/$pkg"
+            local expected_path="$DOTFILES_DIR/$pkg_cat/$pkg"
             if [[ "$resolved_target" != "$expected_path"* ]]; then
                 rm "$target"
                 REMOVE_COUNT=$((REMOVE_COUNT + 1))
@@ -186,34 +150,18 @@ backup_and_remove() {
     fi
 }
 
-# 3. Handle specific conflicts (only for relevant packages)
-get_conflicts() {
-  case "$1" in
-    zsh)        echo ".zshrc .zsh_profile .nvm_setup .pyenv_setup.sh .zshenv .zshrc.local.example .flutter_setup .p10k.zsh .config/starship.toml" ;;
-    .oh-my-zsh) echo ".oh-my-zsh/custom/plugins/zsh-autosuggestions .oh-my-zsh/custom/plugins/zsh-you-should-use" ;;
-    tmux)       echo ".tmux.conf .tmux.conf.local" ;;
-    gnupg)      echo ".gnupg" ;;
-    zellij)     echo ".config/zellij" ;;
-    karabiner)  echo ".config/karabiner" ;;
-    ghostty)    echo ".config/ghostty" ;;
-    cmux)       echo ".config/cmux" ;;
-    pip)        echo ".config/pip" ;;
-    nvim)       echo "init.lua lazy-lock.json lua .config/nvim" ;;
-    lvim)       echo ".config/lvim .local/bin/lvim" ;;
-  esac
-}
-
 echo "🧹 [1/3] Cleaning up conflicts..."
 mkdir -p "$BACKUP_DIR"
 
 for pkg in "${PACKAGES[@]}"; do
-  for conflict in $(get_conflicts "$pkg"); do
+  conflicts=$(python3 "$MANIFEST_PY" get-conflicts "$pkg")
+  for conflict in $conflicts; do
     backup_and_remove "$conflict" "$pkg"
   done
 done
 echo "🧹 [1/3] Cleanup complete (backed up $BACKUP_COUNT files, removed $REMOVE_COUNT outdated links)."
 
-# 2. Backup summary
+# 3. Backup summary
 if [ "$BACKUP_COUNT" -gt 0 ]; then
   echo "📦 [2/3] Backed up conflicting files to: $BACKUP_DIR"
 else
@@ -222,12 +170,12 @@ else
   echo "📦 [2/3] No conflicting files to backup."
 fi
 
-# 4. Stow
+# 4. Stow execution
 echo "🔗 [3/3] Linking packages: ${PACKAGES[*]}... [RUNNING]"
 STOW_ERR_FILE=$(mktemp)
 STOW_FAILED=0
 for pkg in "${PACKAGES[@]}"; do
-  category=$(get_category "$pkg")
+  category=$(python3 "$MANIFEST_PY" get-category "$pkg")
   if ! stow -d "$DOTFILES_DIR/$category" --target="$HOME" --restow "$pkg" >"$STOW_ERR_FILE" 2>&1; then
     STOW_FAILED=1
     break
