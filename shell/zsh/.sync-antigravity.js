@@ -81,28 +81,49 @@ function syncMcp() {
       let updatedCount = 0;
       let addedCount = 0;
 
+      const newMcpServers = {};
+
       for (const serverName of sourceServerKeys) {
         const sourceServer = sourceServers[serverName];
+        if (!sourceServer) continue;
+
         if (targetConfig.mcpServers[serverName]) {
           updatedCount++;
         } else {
           addedCount++;
         }
 
-        const existingServer = targetConfig.mcpServers[serverName] || {};
-        const mergedEnv = Object.assign(
-          {},
-          existingServer.env || {},
-          sourceServer.env || {}
-        );
+        const serverCopy = JSON.parse(JSON.stringify(sourceServer));
 
-        targetConfig.mcpServers[serverName] = Object.assign(
-          {},
-          existingServer,
-          sourceServer,
-          { env: mergedEnv }
-        );
+        // Delete invalid/internal attributes if present
+        delete serverCopy["$typeName"];
+
+        // Auto-fix PATH and commands for local executables
+        if (serverCopy.command) {
+          serverCopy.env = serverCopy.env || {};
+          if (!serverCopy.env.PATH) {
+            serverCopy.env.PATH = "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin";
+          } else if (!serverCopy.env.PATH.includes("/opt/homebrew/bin")) {
+            serverCopy.env.PATH = `/opt/homebrew/bin:${serverCopy.env.PATH}`;
+          }
+
+          if (serverCopy.command === "npx") serverCopy.command = "/opt/homebrew/bin/npx";
+          if (serverCopy.command === "node") serverCopy.command = "/opt/homebrew/bin/node";
+          if (serverCopy.command === "codegraph") serverCopy.command = "/opt/homebrew/bin/codegraph";
+          if (serverCopy.command === "uvx") serverCopy.command = "/opt/homebrew/bin/uvx";
+        }
+
+        // Standardize SSE fields (both serverUrl and url)
+        if (serverCopy.serverUrl && !serverCopy.url) {
+          serverCopy.url = serverCopy.serverUrl;
+        } else if (serverCopy.url && !serverCopy.serverUrl) {
+          serverCopy.serverUrl = serverCopy.url;
+        }
+
+        newMcpServers[serverName] = serverCopy;
       }
+
+      targetConfig.mcpServers = newMcpServers;
 
       fs.writeFileSync(targetPath, JSON.stringify(targetConfig, null, 2) + '\n', 'utf8');
       results[target.label] = { added: addedCount, updated: updatedCount, success: true };
