@@ -188,3 +188,37 @@ If you want more/less vertical spacing:
 line-height = 1.5  # Increase spacing
 line-height = 1.3  # Decrease spacing
 ```
+
+---
+
+# 🎨 Ghostty Dark Theme Manager (`ghostty-theme`)
+
+Bộ cài và quản lý nhanh 68+ themes dark cho Ghostty từ [terminalcolors.com/tags/dark/](https://terminalcolors.com/tags/dark/).
+
+## 🚀 Quick Usage
+
+```bash
+# 1. Mở menu tương tác trực quan với Live Color Preview (fzf):
+ghostty-theme
+
+# 2. Áp dụng ngay theme mong muốn:
+ghostty-theme apply catppuccin-mocha
+ghostty-theme apply dracula
+ghostty-theme apply tokyo-night
+
+# 3. Liệt kê danh sách tất cả các theme đã cài đặt:
+ghostty-theme list
+
+# 4. Xem bảng màu ANSI preview của một theme:
+ghostty-theme preview rose-pine
+
+# 5. Tải/cập nhật lại toàn bộ theme từ terminalcolors.com:
+pnpm themes:ghostty:install
+# hoặc:
+ghostty-theme install --live
+```
+
+## 📦 Theme Directory & Storage
+- Các file cấu hình theme được lưu trữ tại `terminal/ghostty/.config/ghostty/themes/` và được tự động symlink sang `~/.config/ghostty/themes/`.
+- Ghostty tự động nhận diện các theme này dưới dạng `(user)` và tự động reload ngay khi cấu hình thay đổi mà không cần restart terminal.
+

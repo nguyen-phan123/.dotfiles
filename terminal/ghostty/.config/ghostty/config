@@ -6,7 +6,7 @@ font-family = "JetBrains Mono"
 font-size = 16
 
 # Theme configuration
-theme = TokyoNight
+theme = rose-pine
 
 # Layout optimization
 window-padding-x = 8

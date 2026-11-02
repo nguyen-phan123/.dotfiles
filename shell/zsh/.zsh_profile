@@ -369,4 +369,6 @@ alias theme-prompt="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/star
 alias starship-theme="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/starship-theme.sh"
 alias theme-light="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/theme-switch.sh light"
 alias theme-dark="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/theme-switch.sh dark"
+alias ghostty-theme="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/ghostty-theme.sh"
+alias theme-ghostty="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/ghostty-theme.sh"
 
