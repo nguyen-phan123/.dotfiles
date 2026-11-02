@@ -1,11 +1,4 @@
 # Development Guidelines for AI-Assisted Programming
-
-**Comprehensive CLAUDE.md guidelines + enforcement agents for Test-Driven Development, TypeScript strict mode, and functional programming.**
-
-[![Watch me use my CLAUDE.md file to build a real feature](https://img.youtube.com/vi/rSoeh6K5Fqo/0.jpg)](https://www.youtube.com/watch?v=rSoeh6K5Fqo)
-
-👆 [**Watch a real coding session**](https://www.youtube.com/watch?v=rSoeh6K5Fqo) showing how CLAUDE.md guides AI pair programming in Claude Code.
-
 ---
 
 ## Table of Contents
@@ -19,8 +12,7 @@
 - [Philosophy](#-philosophy)
 - [Continuous Improvement](#-continuous-improvement)
 - [Personal Dotfiles](#-personal-dotfiles-the-original-purpose)
-- [Contributing](#-contributing)
-- [Contact](#-contact)
+
 
 ---
 
@@ -709,8 +701,9 @@ The agent can post reviews directly to PRs using GitHub MCP tools:
 Use the `/generate-pr-review` command to create a project-specific PR reviewer that combines global rules with your project's conventions. The generator analyzes:
 - Existing AI/LLM configs (`.cursorrules`, `CLAUDE.md`, `.github/copilot-instructions.md`)
 - Architecture Decision Records (ADRs)
-- Project documentation (`CONTRIBUTING.md`, `DEVELOPMENT.md`)
+- Project documentation (e.g., `CONTEXT.md`, `AGENTS.md`)
 - Tech stack and existing code patterns
+
 
 ---
 
@@ -747,7 +740,7 @@ Claude Code: [Launches use-case-data-patterns agent]
 | "I want this on all my personal projects" | [Option 1: Global Install](#option-1-install-to-claude-global-personal-config--recommended) |
 | "I'm setting this up for my team" | [Option 2: Project-specific install](#option-2-use-claudemd--agents-recommended-for-projects) |
 | "I just want to try the guidelines first" | [Option 3: CLAUDE.md only](#option-3-use-claudemd-only-minimal) |
-| "I need to customize for my team's standards" | [Option 4: Fork and customize](#option-4-fork-and-customize-advanced) |
+
 
 ---
 
@@ -788,21 +781,21 @@ Agents can be invoked implicitly (Claude detects when to use them) or explicitly
 
 **One-liner installation:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/citypaul/.dotfiles/main/install-claude.sh | bash
+curl -fsSL https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/install-claude.sh | bash
 ```
 
 **One-liner with options** (use `bash -s --` to pass arguments):
 ```bash
 # Install with OpenCode support
-curl -fsSL https://raw.githubusercontent.com/citypaul/.dotfiles/main/install-claude.sh | bash -s -- --with-opencode
+curl -fsSL https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/install-claude.sh | bash -s -- --with-opencode
 
 # Install specific version
-curl -fsSL https://raw.githubusercontent.com/citypaul/.dotfiles/main/install-claude.sh | bash -s -- --version v2.0.0
+curl -fsSL https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/install-claude.sh | bash -s -- --version v2.0.0
 ```
 
 **Or download and run:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/citypaul/.dotfiles/main/install-claude.sh -o install-claude.sh
+curl -fsSL https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/install-claude.sh -o install-claude.sh
 chmod +x install-claude.sh
 ./install-claude.sh
 ```
@@ -877,15 +870,15 @@ OpenCode doesn't automatically read `~/.claude/` files. Instead, it uses a confi
 
 ```bash
 # One-liner with OpenCode support
-curl -fsSL https://raw.githubusercontent.com/citypaul/.dotfiles/main/install-claude.sh | bash -s -- --with-opencode
+curl -fsSL https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/install-claude.sh | bash -s -- --with-opencode
 
 # Or download and run with options
-curl -fsSL https://raw.githubusercontent.com/citypaul/.dotfiles/main/install-claude.sh -o install-claude.sh
+curl -fsSL https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/install-claude.sh -o install-claude.sh
 chmod +x install-claude.sh
 ./install-claude.sh --with-opencode
 
 # Install OpenCode config only (if you already have CLAUDE.md installed)
-curl -fsSL https://raw.githubusercontent.com/citypaul/.dotfiles/main/install-claude.sh | bash -s -- --opencode-only
+curl -fsSL https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/install-claude.sh | bash -s -- --opencode-only
 ```
 
 **What gets installed:**
@@ -934,26 +927,26 @@ For full enforcement in a specific project, install both CLAUDE.md and the agent
 mkdir -p .claude/agents
 
 # Download CLAUDE.md
-curl -o .claude/CLAUDE.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/CLAUDE.md
+curl -o .claude/CLAUDE.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/CLAUDE.md
 
 # Download all agents
-curl -o .claude/agents/tdd-guardian.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/agents/tdd-guardian.md
-curl -o .claude/agents/ts-enforcer.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/agents/ts-enforcer.md
-curl -o .claude/agents/refactor-scan.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/agents/refactor-scan.md
-curl -o .claude/agents/docs-guardian.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/agents/docs-guardian.md
-curl -o .claude/agents/learn.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/agents/learn.md
-curl -o .claude/agents/progress-guardian.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/agents/progress-guardian.md
-curl -o .claude/agents/adr.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/agents/adr.md
-curl -o .claude/agents/pr-reviewer.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/agents/pr-reviewer.md
-curl -o .claude/agents/use-case-data-patterns.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/agents/use-case-data-patterns.md
+curl -o .claude/agents/tdd-guardian.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/agents/tdd-guardian.md
+curl -o .claude/agents/ts-enforcer.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/agents/ts-enforcer.md
+curl -o .claude/agents/refactor-scan.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/agents/refactor-scan.md
+curl -o .claude/agents/docs-guardian.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/agents/docs-guardian.md
+curl -o .claude/agents/learn.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/agents/learn.md
+curl -o .claude/agents/progress-guardian.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/agents/progress-guardian.md
+curl -o .claude/agents/adr.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/agents/adr.md
+curl -o .claude/agents/pr-reviewer.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/agents/pr-reviewer.md
+curl -o .claude/agents/use-case-data-patterns.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/agents/use-case-data-patterns.md
 
 # Download agents README
-curl -o .claude/agents/README.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/agents/README.md
+curl -o .claude/agents/README.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/agents/README.md
 
 # Download commands
 mkdir -p .claude/commands
-curl -o .claude/commands/pr.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/commands/pr.md
-curl -o .claude/commands/generate-pr-review.md https://raw.githubusercontent.com/citypaul/.dotfiles/main/claude/.claude/commands/generate-pr-review.md
+curl -o .claude/commands/pr.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/commands/pr.md
+curl -o .claude/commands/generate-pr-review.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/claude/.claude/commands/generate-pr-review.md
 ```
 
 ---
@@ -977,30 +970,11 @@ Download the complete single-file version:
 ```bash
 # In your project root
 mkdir -p .claude
-curl -o .claude/CLAUDE.md https://raw.githubusercontent.com/citypaul/.dotfiles/v1.0.0/claude/.claude/CLAUDE.md
+curl -o .claude/CLAUDE.md https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/v1.0.0/claude/.claude/CLAUDE.md
 ```
 
 This gives you the complete guidelines (1,818 lines) in a single standalone file.
 
----
-
-### Option 4: Fork and Customize (Advanced)
-
-**Best for:** Teams with specific standards who need full customization control
-
-**Why choose this:**
-- ✅ Complete control over guidelines and enforcement
-- ✅ Customize for your team's specific tech stack
-- ✅ Modify agent behavior to match your workflow
-- ✅ Maintain team-specific patterns and anti-patterns
-
-**How to customize:**
-
-1. Fork this repository
-2. Modify CLAUDE.md to match your team's preferences
-3. Customize agents to enforce your specific rules
-4. Commit to your fork
-5. Pull into your projects
 
 ---
 
@@ -1018,9 +992,9 @@ This gives you the complete guidelines (1,818 lines) in a single standalone file
 | **v2.0.0** | @docs/ imports | ~3000 lines always | Full docs always loaded |
 | **v1.0.0** | Single file | ~1800 lines always | Standalone, no dependencies |
 
-- **v3.0.0 (current):** https://github.com/citypaul/.dotfiles/tree/main/claude/.claude
-- **v2.0.0 modular docs:** https://github.com/citypaul/.dotfiles/tree/v2.0.0/claude/.claude
-- **v1.0.0 single file:** https://github.com/citypaul/.dotfiles/blob/v1.0.0/claude/.claude/CLAUDE.md
+- **v3.0.0 (current):** https://github.com/nguyen-phan123/.dotfiles/tree/main/claude/.claude
+- **v2.0.0 modular docs:** https://github.com/nguyen-phan123/.dotfiles/tree/v2.0.0/claude/.claude
+- **v1.0.0 single file:** https://github.com/nguyen-phan123/.dotfiles/blob/v1.0.0/claude/.claude/CLAUDE.md
 
 The installation script installs v3.0.0 by default. Use `--version v2.0.0` or `--version v1.0.0` for older versions.
 
@@ -1179,7 +1153,23 @@ The `claude/.claude/settings.json` file contains my personal Claude Code configu
 - [claude-powerline](https://github.com/Owloops/claude-powerline) - vim-style statusline with usage tracking and git integration
 - [Official Anthropic plugins](https://github.com/anthropics/claude-code/tree/main/plugins) - feature-dev, frontend-design, hookify, learning-output-style, plugin-dev, security-guidance
 
+### Gemini & Antigravity Sync
+
+This repository includes a utility to automatically sync Model Context Protocol (MCP) server configurations, custom agent skills, and plugins from the central Gemini Client settings (`~/.gemini/settings.json` and `~/.gemini/skills/`) directly into the target Antigravity configurations:
+- **Antigravity IDE** (`~/.gemini/antigravity-ide/`)
+- **Antigravity App** (`~/.gemini/antigravity/`)
+- **Antigravity CLI / Gemini Config** (`~/.gemini/config/`)
+
+To run the synchronization:
+```bash
+geminisync  # or mcpsync (legacy alias)
+```
+This runs the underlying Node.js script `~/.sync-gemini.js` which performs:
+1. A safe deep merge of `mcpServers` settings.
+2. Synchronizes active agent skills symlinks and prunes broken/obsolete symlinks.
+
 ### Installing Everything
+
 
 **⚠️ Important:** This installs ALL personal dotfiles (git, shell, vim, etc.) **NOT just CLAUDE.md**
 
@@ -1196,13 +1186,16 @@ To install all dotfiles including my personal configurations:
 # Fedora: sudo dnf install stow
 
 # Clone the repository
-git clone https://github.com/citypaul/.dotfiles.git ~/.dotfiles
+git clone https://github.com/nguyen-phan123/.dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 
 # Run the installation script
 ./install.sh
 
 # This uses GNU Stow to create symlinks for all configurations
+
+**Troubleshooting:**
+If you see "stowing package would cause conflicts", simply run `./install.sh` again. The script includes a safe backup mechanism that moves conflicting files to `~/dotfiles_backup/` before linking.
 ```
 
 This will install:
@@ -1256,27 +1249,8 @@ Feel free to browse the repository and cherry-pick what's useful:
 
 **Note:** These are my personal preferences. Review before installing - you may want to customize them for your workflow.
 
----
 
-## 🤝 Contributing
 
-This is a personal repository that became unexpectedly popular. Contributions are welcome, especially:
-
-- **Improvements to CLAUDE.md** - Better decision frameworks, clearer examples
-- **Agent enhancements** - New checks, better error messages
-- **Documentation** - Clarifications, additional examples
-- **Real-world feedback** - What worked? What didn't?
-
-Please open issues or PRs on GitHub.
-
----
-
-## 📞 Contact
-
-**Paul Hammond**
-
-- [LinkedIn](https://www.linkedin.com/in/paul-hammond-bb5b78251/) - Feel free to connect and discuss
-- [GitHub Issues](https://github.com/citypaul/.dotfiles/issues) - Questions, suggestions, feedback
 
 ---
 
@@ -1296,15 +1270,4 @@ Special thanks to contributors who have shared their work:
 
 This repository is open source and available for use. The CLAUDE.md file and agents are designed to be copied and customized for your projects.
 
----
 
-## ⭐ If This Helped You
-
-If you found CLAUDE.md or the agents valuable, consider:
-
-- Starring this repo on GitHub
-- Sharing it with your team
-- Contributing improvements back
-- Connecting on LinkedIn to share your experience
-
-The more people who adopt these practices, the better the AI-assisted development ecosystem becomes for everyone.

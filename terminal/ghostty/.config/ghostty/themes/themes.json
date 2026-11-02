@@ -1,0 +1,619 @@
+{
+  "source": "https://terminalcolors.com/tags/dark/",
+  "updatedAt": "2026-10-13T07:48:23.249Z",
+  "totalThemes": 68,
+  "themes": [
+    {
+      "id": "apprentice-default",
+      "themeId": "apprentice",
+      "themeName": "Apprentice",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#262626",
+      "foreground": "#bcbcbc"
+    },
+    {
+      "id": "ayu-dark",
+      "themeId": "ayu",
+      "themeName": "Ayu",
+      "variantId": "dark",
+      "variantName": "Dark",
+      "background": "#0b0e14",
+      "foreground": "#bfbdb6"
+    },
+    {
+      "id": "ayu-mirage",
+      "themeId": "ayu",
+      "themeName": "Ayu",
+      "variantId": "mirage",
+      "variantName": "Mirage",
+      "background": "#1f2430",
+      "foreground": "#cccac2"
+    },
+    {
+      "id": "catppuccin-mocha",
+      "themeId": "catppuccin",
+      "themeName": "Catppuccin",
+      "variantId": "mocha",
+      "variantName": "Mocha",
+      "background": "#1e1e2e",
+      "foreground": "#cdd6f4"
+    },
+    {
+      "id": "catppuccin-macchiato",
+      "themeId": "catppuccin",
+      "themeName": "Catppuccin",
+      "variantId": "macchiato",
+      "variantName": "Macchiato",
+      "background": "#24273a",
+      "foreground": "#cad3f5"
+    },
+    {
+      "id": "catppuccin-frappe",
+      "themeId": "catppuccin",
+      "themeName": "Catppuccin",
+      "variantId": "frappe",
+      "variantName": "Frappé",
+      "background": "#303446",
+      "foreground": "#c6d0f5"
+    },
+    {
+      "id": "cobalt2-default",
+      "themeId": "cobalt2",
+      "themeName": "Cobalt2",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#122738",
+      "foreground": "#ffffff"
+    },
+    {
+      "id": "deus-default",
+      "themeId": "deus",
+      "themeName": "Deus",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#2c323b",
+      "foreground": "#eaeaea"
+    },
+    {
+      "id": "dracula-default",
+      "themeId": "dracula",
+      "themeName": "Dracula",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#282a36",
+      "foreground": "#f8f8f2"
+    },
+    {
+      "id": "dracula-soft",
+      "themeId": "dracula",
+      "themeName": "Dracula",
+      "variantId": "soft",
+      "variantName": "Soft",
+      "background": "#282a36",
+      "foreground": "#f6f6f4"
+    },
+    {
+      "id": "everforest-dark",
+      "themeId": "everforest",
+      "themeName": "Everforest",
+      "variantId": "dark",
+      "variantName": "Dark",
+      "background": "#2d353b",
+      "foreground": "#d3c6aa"
+    },
+    {
+      "id": "github-dark",
+      "themeId": "github",
+      "themeName": "GitHub",
+      "variantId": "dark",
+      "variantName": "Dark",
+      "background": "#010409",
+      "foreground": "#e6edf3"
+    },
+    {
+      "id": "github-dark-dimmed",
+      "themeId": "github",
+      "themeName": "GitHub",
+      "variantId": "dark-dimmed",
+      "variantName": "Dark Dimmed",
+      "background": "#1c2128",
+      "foreground": "#adbac7"
+    },
+    {
+      "id": "github-dark-high-contrast",
+      "themeId": "github",
+      "themeName": "GitHub",
+      "variantId": "dark-high-contrast",
+      "variantName": "Dark High Contrast",
+      "background": "#010409",
+      "foreground": "#f0f3f6"
+    },
+    {
+      "id": "github-dark-colorblind",
+      "themeId": "github",
+      "themeName": "GitHub",
+      "variantId": "dark-colorblind",
+      "variantName": "Dark Colorblind",
+      "background": "#010409",
+      "foreground": "#c9d1d9"
+    },
+    {
+      "id": "gotham-default",
+      "themeId": "gotham",
+      "themeName": "Gotham",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#0c1014",
+      "foreground": "#99d1ce"
+    },
+    {
+      "id": "gruvbox-dark",
+      "themeId": "gruvbox",
+      "themeName": "Gruvbox",
+      "variantId": "dark",
+      "variantName": "Dark",
+      "background": "#282828",
+      "foreground": "#ebdbb2"
+    },
+    {
+      "id": "gruvbox-dark-hard-contrast",
+      "themeId": "gruvbox",
+      "themeName": "Gruvbox",
+      "variantId": "dark-hard-contrast",
+      "variantName": "Dark Hard Contrast",
+      "background": "#1d2021",
+      "foreground": "#ebdbb2"
+    },
+    {
+      "id": "gruvbox-dark-soft-contrast",
+      "themeId": "gruvbox",
+      "themeName": "Gruvbox",
+      "variantId": "dark-soft-contrast",
+      "variantName": "Dark Soft Contrast",
+      "background": "#32302f",
+      "foreground": "#ebdbb2"
+    },
+    {
+      "id": "iceberg-dark",
+      "themeId": "iceberg",
+      "themeName": "Iceberg",
+      "variantId": "dark",
+      "variantName": "Dark",
+      "background": "#161821",
+      "foreground": "#c6c8d1"
+    },
+    {
+      "id": "jellybeans-default",
+      "themeId": "jellybeans",
+      "themeName": "Jellybeans",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#121212",
+      "foreground": "#dedede"
+    },
+    {
+      "id": "kanagawa-wave",
+      "themeId": "kanagawa",
+      "themeName": "Kanagawa",
+      "variantId": "wave",
+      "variantName": "Wave",
+      "background": "#1f1f28",
+      "foreground": "#dcd7ba"
+    },
+    {
+      "id": "kanagawa-dragon",
+      "themeId": "kanagawa",
+      "themeName": "Kanagawa",
+      "variantId": "dragon",
+      "variantName": "Dragon",
+      "background": "#181616",
+      "foreground": "#c5c9c5"
+    },
+    {
+      "id": "lucario-default",
+      "themeId": "lucario",
+      "themeName": "Lucario",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#2b3e50",
+      "foreground": "#f8f8f2"
+    },
+    {
+      "id": "miasma-default",
+      "themeId": "miasma",
+      "themeName": "Miasma",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#222222",
+      "foreground": "#c2c2b0"
+    },
+    {
+      "id": "moonfly-default",
+      "themeId": "moonfly",
+      "themeName": "Moonfly",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#080808",
+      "foreground": "#bdbdbd"
+    },
+    {
+      "id": "night-owl-dark",
+      "themeId": "night-owl",
+      "themeName": "Night Owl",
+      "variantId": "dark",
+      "variantName": "Dark",
+      "background": "#011627",
+      "foreground": "#cccccc"
+    },
+    {
+      "id": "nightfly-default",
+      "themeId": "nightfly",
+      "themeName": "Nightfly",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#011627",
+      "foreground": "#bdc1c6"
+    },
+    {
+      "id": "nightfox-default",
+      "themeId": "nightfox",
+      "themeName": "Nightfox",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#192330",
+      "foreground": "#cdcecf"
+    },
+    {
+      "id": "nightfox-duskfox",
+      "themeId": "nightfox",
+      "themeName": "Nightfox",
+      "variantId": "duskfox",
+      "variantName": "Duskfox",
+      "background": "#232136",
+      "foreground": "#e0def4"
+    },
+    {
+      "id": "nightfox-nordfox",
+      "themeId": "nightfox",
+      "themeName": "Nightfox",
+      "variantId": "nordfox",
+      "variantName": "Nordfox",
+      "background": "#2e3440",
+      "foreground": "#cdcecf"
+    },
+    {
+      "id": "nightfox-terafox",
+      "themeId": "nightfox",
+      "themeName": "Nightfox",
+      "variantId": "terafox",
+      "variantName": "Terafox",
+      "background": "#152528",
+      "foreground": "#e6eaea"
+    },
+    {
+      "id": "noctis-default",
+      "themeId": "noctis",
+      "themeName": "Noctis",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#03191b",
+      "foreground": "#b2cacd"
+    },
+    {
+      "id": "noctis-azureus",
+      "themeId": "noctis",
+      "themeName": "Noctis",
+      "variantId": "azureus",
+      "variantName": "Azureus",
+      "background": "#051b29",
+      "foreground": "#becfda"
+    },
+    {
+      "id": "noctis-bordo",
+      "themeId": "noctis",
+      "themeName": "Noctis",
+      "variantId": "bordo",
+      "variantName": "Bordo",
+      "background": "#272022",
+      "foreground": "#cbbec2"
+    },
+    {
+      "id": "noctis-minimus",
+      "themeId": "noctis",
+      "themeName": "Noctis",
+      "variantId": "minimus",
+      "variantName": "Minimus",
+      "background": "#0e1920",
+      "foreground": "#c5cdd3"
+    },
+    {
+      "id": "nord-default",
+      "themeId": "nord",
+      "themeName": "Nord",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#2e3440",
+      "foreground": "#d8dee9"
+    },
+    {
+      "id": "nordic-default",
+      "themeId": "nordic",
+      "themeName": "Nordic",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#242933",
+      "foreground": "#bbc3d4"
+    },
+    {
+      "id": "one-dark",
+      "themeId": "one",
+      "themeName": "One",
+      "variantId": "dark",
+      "variantName": "Dark",
+      "background": "#282c34",
+      "foreground": "#abb2bf"
+    },
+    {
+      "id": "one-half-dark",
+      "themeId": "one-half",
+      "themeName": "One Half",
+      "variantId": "dark",
+      "variantName": "Dark",
+      "background": "#282c34",
+      "foreground": "#dcdfe4"
+    },
+    {
+      "id": "panda-default",
+      "themeId": "panda",
+      "themeName": "Panda",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#292a2b",
+      "foreground": "#cccccc"
+    },
+    {
+      "id": "posterpole-default",
+      "themeId": "posterpole",
+      "themeName": "Posterpole",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#25222a",
+      "foreground": "#c6c0b9"
+    },
+    {
+      "id": "posterpole-gray",
+      "themeId": "posterpole",
+      "themeName": "Posterpole",
+      "variantId": "gray",
+      "variantName": "Gray",
+      "background": "#1f1f1f",
+      "foreground": "#c6c0b9"
+    },
+    {
+      "id": "rose-pine-default",
+      "themeId": "rose-pine",
+      "themeName": "Rosé Pine",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#1f1d2e",
+      "foreground": "#e0def4"
+    },
+    {
+      "id": "rose-pine-moon",
+      "themeId": "rose-pine",
+      "themeName": "Rosé Pine",
+      "variantId": "moon",
+      "variantName": "Moon",
+      "background": "#2a273f",
+      "foreground": "#e0def4"
+    },
+    {
+      "id": "seoul256-dark",
+      "themeId": "seoul256",
+      "themeName": "Seoul256",
+      "variantId": "dark",
+      "variantName": "Dark",
+      "background": "#3a3a3a",
+      "foreground": "#d0d0d0"
+    },
+    {
+      "id": "shades-of-purple-default",
+      "themeId": "shades-of-purple",
+      "themeName": "Shades of Purple",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#1e1e3f",
+      "foreground": "#ffffff"
+    },
+    {
+      "id": "shades-of-purple-super-dark",
+      "themeId": "shades-of-purple",
+      "themeName": "Shades of Purple",
+      "variantId": "super-dark",
+      "variantName": "Super Dark",
+      "background": "#15152b",
+      "foreground": "#ffffff"
+    },
+    {
+      "id": "solarized-dark",
+      "themeId": "solarized",
+      "themeName": "Solarized",
+      "variantId": "dark",
+      "variantName": "Dark",
+      "background": "#002b36",
+      "foreground": "#839496"
+    },
+    {
+      "id": "sonokai-default",
+      "themeId": "sonokai",
+      "themeName": "Sonokai",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#2c2e34",
+      "foreground": "#e2e2e3"
+    },
+    {
+      "id": "sonokai-atlantis",
+      "themeId": "sonokai",
+      "themeName": "Sonokai",
+      "variantId": "atlantis",
+      "variantName": "Atlantis",
+      "background": "#2a2f38",
+      "foreground": "#e1e3e4"
+    },
+    {
+      "id": "sonokai-andromeda",
+      "themeId": "sonokai",
+      "themeName": "Sonokai",
+      "variantId": "andromeda",
+      "variantName": "Andromeda",
+      "background": "#2b2d3a",
+      "foreground": "#e1e3e4"
+    },
+    {
+      "id": "sonokai-shusia",
+      "themeId": "sonokai",
+      "themeName": "Sonokai",
+      "variantId": "shusia",
+      "variantName": "Shusia",
+      "background": "#2d2a2e",
+      "foreground": "#e3e1e4"
+    },
+    {
+      "id": "sonokai-maia",
+      "themeId": "sonokai",
+      "themeName": "Sonokai",
+      "variantId": "maia",
+      "variantName": "Maia",
+      "background": "#273136",
+      "foreground": "#e1e2e3"
+    },
+    {
+      "id": "sonokai-espresso",
+      "themeId": "sonokai",
+      "themeName": "Sonokai",
+      "variantId": "espresso",
+      "variantName": "Espresso",
+      "background": "#312c2b",
+      "foreground": "#e4e3e1"
+    },
+    {
+      "id": "srcery-default",
+      "themeId": "srcery",
+      "themeName": "Srcery",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#1c1b19",
+      "foreground": "#fce8c3"
+    },
+    {
+      "id": "tender-default",
+      "themeId": "tender",
+      "themeName": "Tender",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#282828",
+      "foreground": "#eeeeee"
+    },
+    {
+      "id": "tokyo-night-default",
+      "themeId": "tokyo-night",
+      "themeName": "Tokyo Night",
+      "variantId": "default",
+      "variantName": "Default",
+      "background": "#1a1b26",
+      "foreground": "#c0caf5"
+    },
+    {
+      "id": "tokyo-night-storm",
+      "themeId": "tokyo-night",
+      "themeName": "Tokyo Night",
+      "variantId": "storm",
+      "variantName": "Storm",
+      "background": "#24283b",
+      "foreground": "#c0caf5"
+    },
+    {
+      "id": "tokyo-night-moon",
+      "themeId": "tokyo-night",
+      "themeName": "Tokyo Night",
+      "variantId": "moon",
+      "variantName": "Moon",
+      "background": "#222436",
+      "foreground": "#c8d3f5"
+    },
+    {
+      "id": "tomorrow-night",
+      "themeId": "tomorrow",
+      "themeName": "Tomorrow",
+      "variantId": "night",
+      "variantName": "Night",
+      "background": "#1d1f21",
+      "foreground": "#c5c8c6"
+    },
+    {
+      "id": "tomorrow-night-eighties",
+      "themeId": "tomorrow",
+      "themeName": "Tomorrow",
+      "variantId": "night-eighties",
+      "variantName": "Night Eighties",
+      "background": "#2d2d2d",
+      "foreground": "#cccccc"
+    },
+    {
+      "id": "tomorrow-night-blue",
+      "themeId": "tomorrow",
+      "themeName": "Tomorrow",
+      "variantId": "night-blue",
+      "variantName": "Night Blue",
+      "background": "#002451",
+      "foreground": "#ffffff"
+    },
+    {
+      "id": "tomorrow-night-bright",
+      "themeId": "tomorrow",
+      "themeName": "Tomorrow",
+      "variantId": "night-bright",
+      "variantName": "Night Bright",
+      "background": "#000000",
+      "foreground": "#eaeaea"
+    },
+    {
+      "id": "zenbones-zenwritten-dark",
+      "themeId": "zenbones",
+      "themeName": "Zenbones",
+      "variantId": "zenwritten-dark",
+      "variantName": "Zenwritten Dark",
+      "background": "#191919",
+      "foreground": "#bbbbbb"
+    },
+    {
+      "id": "zenbones-neobones-dark",
+      "themeId": "zenbones",
+      "themeName": "Zenbones",
+      "variantId": "neobones-dark",
+      "variantName": "Neobones Dark",
+      "background": "#0f191f",
+      "foreground": "#c6d5cf"
+    },
+    {
+      "id": "zenbones-rosebones-dark",
+      "themeId": "zenbones",
+      "themeName": "Zenbones",
+      "variantId": "rosebones-dark",
+      "variantName": "Rosebones Dark",
+      "background": "#1a1825",
+      "foreground": "#e1d4d4"
+    },
+    {
+      "id": "zenbones-forestbones-dark",
+      "themeId": "zenbones",
+      "themeName": "Zenbones",
+      "variantId": "forestbones-dark",
+      "variantName": "Forestbones Dark",
+      "background": "#2c343a",
+      "foreground": "#e7dcc4"
+    }
+  ]
+}

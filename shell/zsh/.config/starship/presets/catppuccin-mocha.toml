@@ -1,0 +1,64 @@
+# Catppuccin Mocha Preset for Starship
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$git_metrics\
+$package\
+$dart\
+$nodejs\
+$python\
+$rust\
+$cmd_duration\
+$time\
+$line_break\
+$character"""
+
+[character]
+success_symbol = "[❯](bold #cba6f7)"
+error_symbol = "[❯](bold #f38ba8)"
+
+[directory]
+style = "bold #89b4fa"
+format = "[$path]($style)[$read_only]($read_only_style) "
+truncation_length = 3
+home_symbol = "~"
+
+[git_branch]
+symbol = "󰘬 "
+style = "bold #cba6f7"
+format = "[$symbol$branch]($style) "
+
+[git_status]
+style = "bold #f9e2af"
+format = '([$all_status$ahead_behind]($style) )'
+
+[git_metrics]
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
+added_style = 'bold #a6e3a1'
+deleted_style = 'bold #f38ba8'
+
+[dart]
+symbol = " "
+style = "bold #89b4fa"
+format = "[$symbol($version )]($style)"
+
+[nodejs]
+symbol = "󰎙 "
+style = "bold #a6e3a1"
+format = "[$symbol($version )]($style)"
+
+[cmd_duration]
+min_time = 2_000
+style = "bold #f9e2af"
+format = "[$duration]($style) "
+
+[time]
+disabled = false
+time_format = "%R"
+style = "dimmed #6c7086"
+format = "[$time]($style) "

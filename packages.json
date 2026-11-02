@@ -1,0 +1,62 @@
+{
+  "version": "1.0.0",
+  "packages": {
+    "zsh": {
+      "category": "shell",
+      "deps": ["starship", "zoxide", "bat", "eza", "fzf"],
+      "conflicts": [".zshrc", ".zsh_profile", ".nvm_setup", ".pyenv_setup.sh", ".zshenv", ".zshrc.local.example", ".flutter_setup", ".p10k.zsh", ".config/starship.toml"]
+    },
+    ".oh-my-zsh": {
+      "category": "shell",
+      "deps": ["starship", "zoxide", "bat", "eza", "fzf"],
+      "conflicts": [".oh-my-zsh/custom/plugins/zsh-autosuggestions", ".oh-my-zsh/custom/plugins/zsh-you-should-use"]
+    },
+    "tmux": {
+      "category": "terminal",
+      "deps": [],
+      "conflicts": [".tmux.conf", ".tmux.conf.local"]
+    },
+    "zellij": {
+      "category": "terminal",
+      "deps": [],
+      "conflicts": [".config/zellij"],
+      "hook": "scripts/hooks/zellij.sh"
+    },
+    "ghostty": {
+      "category": "terminal",
+      "deps": [],
+      "conflicts": [".config/ghostty"]
+    },
+    "cmux": {
+      "category": "terminal",
+      "deps": [],
+      "conflicts": [".config/cmux"]
+    },
+    "nvim": {
+      "category": "coding",
+      "deps": ["ripgrep", "fd"],
+      "conflicts": ["init.lua", "lazy-lock.json", "lua", ".config/nvim"]
+    },
+    "lvim": {
+      "category": "coding",
+      "deps": ["lvim"],
+      "conflicts": [".config/lvim", ".local/bin/lvim"]
+    },
+    "gnupg": {
+      "category": "system",
+      "deps": [],
+      "conflicts": [".gnupg"],
+      "hook": "scripts/hooks/gnupg.sh"
+    },
+    "karabiner": {
+      "category": "system",
+      "deps": [],
+      "conflicts": [".config/karabiner"]
+    },
+    "pip": {
+      "category": "system",
+      "deps": [],
+      "conflicts": [".config/pip"]
+    }
+  }
+}

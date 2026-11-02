@@ -1,0 +1,7 @@
+# OpenRouter Configuration (copy this to ~/.zshrc.local and fill in your keys)
+export OPENROUTER_API_KEY="sk-or-v1-your-key-here"
+export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
+export ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY"
+export ANTHROPIC_API_KEY="" # Important: Must be explicitly empty
+export OPENROUTER_MODEL="qwen/qwen3.6-plus:free"
+# Copy content above into ~/.zshrc.local on your machine

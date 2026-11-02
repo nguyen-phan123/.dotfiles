@@ -5,7 +5,7 @@
   "description": "Personal dotfiles including CLAUDE.md development framework and Claude Code agents",
   "repository": {
     "type": "git",
-    "url": "https://github.com/citypaul/.dotfiles.git"
+    "url": "https://github.com/nguyen-phan123/.dotfiles.git"
   },
   "keywords": [
     "claude-code",
@@ -17,11 +17,15 @@
   "author": "Paul Hammond",
   "license": "MIT",
   "scripts": {
-    "changeset": "changeset",
-    "version": "changeset version",
-    "release": "changeset publish"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.27.1"
+    "test": "node --test shell/zsh/*.test.js",
+    "stow:install": "./install.sh",
+    "stow:update": "git pull && ./install.sh",
+    "sync:antigravity": "node shell/zsh/.sync-antigravity.js",
+    "sync:terminal": "./install.sh --only ghostty cmux && echo '\\n✨ Cấu hình đã được sync! Nhấn Cmd+Shift+, trong cmux/Ghostty để reload.'",
+    "edit:gemini": "./scripts/open-ai-settings.sh gemini",
+    "edit:claude": "./scripts/open-ai-settings.sh claude",
+    "edit:ai": "./scripts/open-ai-settings.sh all",
+    "themes:ghostty": "./terminal/scripts/ghostty-theme.sh",
+    "themes:ghostty:install": "./terminal/scripts/download-ghostty-themes.js"
   }
 }

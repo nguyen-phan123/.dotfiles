@@ -11,10 +11,17 @@
 #   ./install-claude.sh --with-opencode    # Also install OpenCode configuration
 #
 # One-liner installation:
-#   curl -fsSL https://raw.githubusercontent.com/citypaul/.dotfiles/main/install-claude.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/install-claude.sh | bash
 #
 
 set -e  # Exit on error
+
+# Local repository detection warning
+if [[ -d ".git" ]]; then
+  echo -e "\033[1;33m⚠️ WARNING: You are running this inside a cloned dotfiles repository.\033[0m"
+  echo -e "\033[1;33mFor local cloned repositories, please run './install.sh' instead to configure the complete dotfiles suite.\033[0m"
+  echo ""
+fi
 
 # Colors for output
 RED='\033[0;31m'
@@ -31,7 +38,7 @@ INSTALL_COMMANDS=true
 INSTALL_AGENTS=true
 INSTALL_OPENCODE=false
 INSTALL_EXTERNAL=true
-BASE_URL="https://raw.githubusercontent.com/citypaul/.dotfiles"
+BASE_URL="https://raw.githubusercontent.com/nguyen-phan123/.dotfiles"
 WEB_QUALITY_SKILLS_URL="https://raw.githubusercontent.com/addyosmani/web-quality-skills"
 
 # Parse arguments
@@ -110,7 +117,7 @@ Examples:
   $0 --no-agents
 
   # One-liner installation
-  curl -fsSL https://raw.githubusercontent.com/citypaul/.dotfiles/main/install-claude.sh | bash
+  curl -fsSL https://raw.githubusercontent.com/nguyen-phan123/.dotfiles/main/install-claude.sh | bash
 
 EOF
       exit 0
@@ -373,5 +380,5 @@ echo -e "  • ${YELLOW}Andrea Laforgia${NC} - test-design-reviewer skill"
 echo -e "    ${BLUE}https://github.com/andlaf-ak/claude-code-agents${NC}"
 echo ""
 echo -e "${BLUE}For help or issues:${NC}"
-echo -e "  ${YELLOW}https://github.com/citypaul/.dotfiles${NC}"
+echo -e "  ${YELLOW}https://github.com/nguyen-phan123/.dotfiles${NC}"
 echo ""

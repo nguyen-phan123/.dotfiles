@@ -1,0 +1,18 @@
+{
+  "changelists": [
+    {
+      "name": "Default",
+      "files": [
+        "antigravity/.gemini/GEMINI.md",
+        "ghostty/.config/ghostty/config",
+        "zsh/.zsh_profile",
+        "zsh/.zshrc",
+        ".agents/skills/command-cli-settings/SKILL.md",
+        ".commandcode/taste/taste.md",
+        "AGENTS.md",
+        "antigravity/.gemini/antigravity/skills/writing-technical-docs/SKILL.md"
+      ]
+    }
+  ],
+  "active": "Default"
+}

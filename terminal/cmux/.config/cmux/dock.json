@@ -1,0 +1,16 @@
+{
+  "controls": [
+    {
+      "name": "Git Status",
+      "command": "git status"
+    },
+    {
+      "name": "Token Analytics",
+      "command": "rtk gain"
+    },
+    {
+      "name": "Dotfiles Stow",
+      "command": "./install.sh"
+    }
+  ]
+}
