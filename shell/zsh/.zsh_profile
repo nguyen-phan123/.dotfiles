@@ -372,3 +372,13 @@ alias theme-dark="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/theme-
 alias ghostty-theme="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/ghostty-theme.sh"
 alias theme-ghostty="$HOME/Documents/GitHub/config/dotfiles/terminal/scripts/ghostty-theme.sh"
 
+# Dotfiles GUI Dashboard
+dotfiles-gui() {
+  local port=4321
+  echo "🚀 Đang mở Dotfiles GUI tại http://localhost:${port}..."
+  (sleep 0.5 && open "http://localhost:${port}") &
+  node "$HOME/Documents/GitHub/config/dotfiles/tools/dotfiles-gui/server.js"
+}
+alias dotgui="dotfiles-gui"
+
+
