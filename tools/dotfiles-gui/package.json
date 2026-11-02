@@ -1,0 +1,9 @@
+{
+  "name": "dotfiles-gui",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Visual dashboard for managing dotfiles, terminal themes, and AI configs",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

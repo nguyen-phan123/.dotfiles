@@ -231,7 +231,7 @@ function createConvenienceAliases(themes, outputDir) {
     { alias: 'kanagawa', target: 'kanagawa-wave' },
     { alias: 'one', target: 'one-dark' },
     { alias: 'one-half', target: 'one-half-dark' },
-    { alias: 'solarized-dark', target: 'solarized-dark' },
+    { alias: 'solarized', target: 'solarized-dark' },
     { alias: 'seoul256', target: 'seoul256-dark' },
     { alias: 'ayu', target: 'ayu-dark' },
     { alias: 'everforest', target: 'everforest-dark' },

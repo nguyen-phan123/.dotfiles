@@ -26,6 +26,7 @@
     "edit:claude": "./scripts/open-ai-settings.sh claude",
     "edit:ai": "./scripts/open-ai-settings.sh all",
     "themes:ghostty": "./terminal/scripts/ghostty-theme.sh",
-    "themes:ghostty:install": "./terminal/scripts/download-ghostty-themes.js"
+    "themes:ghostty:install": "./terminal/scripts/download-ghostty-themes.js",
+    "gui": "node tools/dotfiles-gui/server.js"
   }
 }
